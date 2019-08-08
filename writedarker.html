@@ -46,7 +46,7 @@
 
 
 	<!-- Nav -->
-	<nav id="nav" class="navbar navbar-fixed-top nav-transparent" >
+	<nav id="nav" class="navbar navbar-fixed-top nav-transparent noZen">
 		<div class="container">
 
 			<div class="navbar-header">
@@ -89,7 +89,7 @@
 	<!-- /Header -->
 
 	<!-- header wrapper -->
-	<div class="header-wrapper bg-grey"
+	<div class="header-wrapper bg-grey noZen"
 		style="margin-top: 70px; margin-bottom: 20px; padding-top: 30px; padding-bottom: 30px">
 		<div class="container">
 			<h2>Scientific Writer</h2>
@@ -102,28 +102,50 @@
 	</div>
 	<!-- /header wrapper -->
 
-		
+
 
 	<div class="container-fluid">
 
 		<div class="row" style="margin-left: 8em; position: fixed; z-index:1">
-				<button id="btnToggle" type="button" class="btn btn-light">+</button>
+			<button id="btnToggle" type="button" class="btn btn-light">+</button>
+			<span id="swMenuItems">
+				<span id="formatItems">
+					<button id="btnF" type="button" class="btn btn-primary"><b>F</b></button>
+					<button id="btnI" type="button" class="btn btn-primary"><i>K</i></button>
+					<button id="btnSub" type="button" class="btn btn-primary">X<sub>S</sub></button>
+					<button id="btnSup" type="button" class="btn btn-primary">X<sup>S</sup></button>
+					<button id="btnClean" type="button" class="btn btn-primary">[]</button>
 
-				<span id="swMenuItems">
-				<button id="btnF" type="button" class="btn btn-primary"><b>F</b></button>
-				<button id="btnI" type="button" class="btn btn-primary"><i>K</i></button>
-				<button id="btnSub" type="button" class="btn btn-primary">X<sub>S</sub></button>
-				<button id="btnSup" type="button" class="btn btn-primary">X<sup>S</sup></button>
-				<button id="btnClean" type="button" class="btn btn-primary">[]</button>
-				<button id="btnFont" type="button" class="btn btn-primary">Font</button>
+					<div class="btn-group" role="group">
+						<button id="btnFontBig" type="button" class="btn btn-primary">+</button>
+						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Schrift
+						</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							<a class="dropdown-item" href="#"
+								onclick="$('#swTextEditor').css({'font-size':'16px','font-family':'Varela Round'});">Standard</a><br>
+							<a class="dropdown-item" href="#"
+								onclick="$('#swTextEditor').css({'font-size':'16px','font-family':'Courier New'});">Courier</a>
+						</div>
+						<button id="btnFontSmall" type="button" class="btn btn-primary">-</button>
+					</div>
+				</span>
+
+				<button id="btnCode" type="button" class="btn btn-primary">Code</button>
+				<button id="btnSound" type="button" class="btn btn-primary" style="opacity: 0.5">Sound</button>
+				<button id="btnZen" type="button" class="btn btn-primary" style="opacity: 0.5">Zen</button>
+
 			</span>
 		</div>
 
-			<div class="container sb-padding"></div>
+		<div class="container sb-padding"></div>
 
 		<div class="row">
 			<div class="col-sm-2">
+				<span class="noZen">
 				Navigation
+			</span>
 			</div>
 			<div class="col-sm-8">
 
@@ -131,44 +153,18 @@
 				<!-- TEXTEDITOR TEXTEDITOR TEXTEDITORTEXTEDITORTEXTEDITORTEXTEDITORTEXTEDITORTEXTEDITORTEXTEDITORTEXTEDITOR-->
 				<div id="swTextEditor">
 
-						<div class="card sb-padding" >
-								<div id="heading_0" contenteditable="true" >
-									<h5>
-										<a data-toggle="collapse" href="#collapse_0">
-											<span class='sw_section'>#0 Abstract</span>
-										</a>
-									</h5>
-								</div>
-		
-								<div id="collapse_0" class="card-collapse ">
-									<div class="card-body" contenteditable="true">
-										Anim pariatur cliche reprehenderit, enim ei mdod high life accusamus terry richardson ad
-										squid. 3 wolf
-										moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-										laborum eiusmod.
-										Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-										assumenda
-										shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-										nesciunt sapiente ea
-										proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-										farm-to-table, raw denim
-										aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-										VHS.
-									</div>
-								</div>
-							</div>
-
 					<div class="card sb-padding">
-						<div id="heading_1" contenteditable="true">
+						<div id="heading_0" contenteditable="true">
 							<h5>
-								<a data-toggle="collapse" href="#collapse_1">
-									<span class='sw_section'>#1 Introduction</span>
+								<a data-toggle="collapse" href="#collapse_0">
+									<span class='sw_section'>#0 Abstract</span>
 								</a>
 							</h5>
 						</div>
 
-						<div id="collapse_1" class="card-collapse ">
+						<div id="collapse_0" class="card-collapse ">
 							<div class="card-body" contenteditable="true">
+								<span class= "swTextFeld">
 								Anim pariatur cliche reprehenderit, enim ei mdod high life accusamus terry richardson ad
 								squid. 3 wolf
 								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
@@ -181,12 +177,43 @@
 								farm-to-table, raw denim
 								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
 								VHS.
+								</span>
 							</div>
 						</div>
 					</div>
 
 					<div class="card sb-padding">
-						<div id="heading_2" contenteditable="true" >
+						<div id="heading_1" contenteditable="true">
+							<h5>
+								<a data-toggle="collapse" href="#collapse_1">
+									<span class='sw_section'>#1 Introduction</span>
+								</a>
+							</h5>
+						</div>
+
+						<div id="collapse_1" class="card-collapse ">
+							<div class="card-body" contenteditable="true">
+									<span class= "swTextFeld">
+								Anim pariatur cliche reprehenderit, enim ei mdod high life accusamus terry richardson ad
+								squid. 3 wolf
+								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+								laborum eiusmod.
+								Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+								assumenda
+								shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+								nesciunt sapiente ea
+								proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+								farm-to-table, raw denim
+								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
+								VHS.
+								</span>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="card sb-padding">
+						<div id="heading_2" contenteditable="true">
 							<h5>
 								<a data-toggle="collapse" href="#collapse_2">
 									<span class='sw_section'>#2 Methods</span>
@@ -195,6 +222,7 @@
 						</div>
 						<div id="collapse_2" class="card-collapse">
 							<div class="card-body" contenteditable="true">
+									<span class= "swTextFeld">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
 								squid. 3 wolf
 								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
@@ -207,6 +235,7 @@
 								farm-to-table, raw denim
 								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
 								VHS.
+								</span>
 							</div>
 						</div>
 					</div>
@@ -221,6 +250,7 @@
 						</div>
 						<div id="collapse_3" class="card-collapse">
 							<div class="card-body" contenteditable="true">
+									<span class= "swTextFeld">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
 								squid. 3 wolf
 								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
@@ -233,12 +263,14 @@
 								farm-to-table, raw denim
 								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
 								VHS.
+								</span>
+
 							</div>
 						</div>
 					</div>
 
 					<div class="card sb-padding">
-						<div id="heading_4" contenteditable="true"> 
+						<div id="heading_4" contenteditable="true">
 							<h5>
 								<a data-toggle="collapse" href="#collapse_4">
 									<span class='sw_section'>#4 Discussion</span>
@@ -247,6 +279,7 @@
 						</div>
 						<div id="collapse_4" class="card-collapse collapse">
 							<div class="card-body" contenteditable="true">
+									<span class= "swTextFeld">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
 								squid. 3 wolf
 								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
@@ -259,6 +292,7 @@
 								farm-to-table, raw denim
 								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
 								VHS.
+								</span>
 							</div>
 						</div>
 					</div>
@@ -273,6 +307,7 @@
 						</div>
 						<div id="collapse_5" class="card-collapse collapse">
 							<div class="card-body" contenteditable="true">
+									<span class= "swTextFeld">
 								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
 								squid. 3 wolf
 								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
@@ -285,6 +320,7 @@
 								farm-to-table, raw denim
 								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
 								VHS.
+								</span>
 							</div>
 						</div>
 
@@ -295,7 +331,8 @@
 
 			</div>
 			<div class="col-sm-2">
-				Options
+				<span class="noZen">
+				Options</span>
 			</div>
 		</div>
 	</div>
@@ -303,7 +340,7 @@
 
 
 	<!-- Footer -->
-	<footer id="footer" class="sm-padding bg-dark">
+	<footer id="footer" class="sm-padding bg-dark noZen">
 
 		<!-- Container -->
 		<div class="container">
@@ -356,34 +393,131 @@
 
 	<!-- Simple Scripts -->
 	<script>
-		$("#btnToggle").click(function(){
-			$("#swMenuItems" ).toggle();
+		var Options = new Object();
+		Options.PlaySound = false;
+		Options.SoundTippUrl = 'media/tipp_sound.wav';
+
+		// SCRIPT fuer die Menuleiste
+		$("#btnToggle").click(function () {
+			$("#swMenuItems").toggle();
 		});
 
-		$("#btnF").click(function(){
+		$("#btnF").click(function () {
 			document.execCommand("bold");
 		});
 
-		$("#btnI").click(function(){
+		$("#btnI").click(function () {
 			document.execCommand("italic");
 		});
 
-		$("#btnSup").click(function(){
+		$("#btnSup").click(function () {
 			document.execCommand("superscript");
 		});
 
-		$("#btnSub").click(function(){
+		$("#btnSub").click(function () {
 			document.execCommand("subscript");
 		});
 
-		$("#btnClean").click(function(){
+		$("#btnClean").click(function () {
 			document.execCommand("removeFormat");
 		});
 
-		$("#btnFont").click(function(){
+		$("#btnFont").click(function () {
 			document.execCommand("fontName", false, "Comic Sans MS");
 		});
-	
+
+		$("#btnFontBig").click(function () {
+			var fontSize = parseInt($("#swTextEditor").css("font-size"));
+			fontSize = fontSize + 1 + "px";
+			$("#swTextEditor").css({
+				'font-size': fontSize
+			});
+		});
+
+		$("#btnFontSmall").click(function () {
+			var fontSize = parseInt($("#swTextEditor").css("font-size"));
+			fontSize = fontSize - 1 + "px";
+			$("#swTextEditor").css({
+				'font-size': fontSize
+			});
+		});
+
+		$("#btnSound").click(function () {
+			var btnOpacity = $("#btnSound").css("opacity");
+			if (btnOpacity == 1) {
+				$("#btnSound").css({
+					"opacity": 0.5
+				});
+				Options.PlaySound = false;
+			} else {
+				$("#btnSound").css({
+					"opacity": 1
+				});
+				Options.PlaySound = true;
+			}
+		});
+
+		$("#btnZen").click(function () {
+			var btnOpacity = $("#btnZen").css("opacity");
+			if (btnOpacity == 1) {
+				$("#btnZen").css({"opacity": 0.5});
+				displayStr = 'inherit';
+			} else {
+				$("#btnZen").css({"opacity": 1});
+				displayStr = 'none';
+			}
+			$(".noZen").css({'display':displayStr});
+		});
+
+
+		$("#btnCode").click(function () {
+			var btnOpacity = $("#btnCode").css("opacity");
+			if (btnOpacity == 1) {
+				$("#btnCode").css({"opacity": 0.5});
+				$("#btnCode").text('Editor');
+				Options.PlaySound = false;
+
+				$('#swTextEditor').find('.swTextFeld').each(function(){
+					var curEl = this;
+					curEl.innerText = curEl.innerHTML;
+				})
+				//deacitvate buttons
+				$('#formatItems').find('.btn').each(function(){
+					var $curEl = $(this);
+					$curEl.attr('disabled', true);
+				})
+
+			} else {
+				$("#btnCode").css({"opacity": 1});
+				$("#btnCode").text('Code');
+				Options.PlaySound = true;
+
+				$('#swTextEditor').find('.swTextFeld').each(function(){
+					var curEl = this;
+					curEl.innerHTML = curEl.innerText;
+				})
+
+				//reacitvate buttons
+				$('#formatItems').find('.btn').each(function(){
+					var $curEl = $(this);
+					$curEl.attr('disabled', false);
+				})
+
+			}
+		});	
+
+		// SOUND FUNCTIONS ///////////////////////////
+		function PlaySoundFunction(optionStr) {
+			if (Options.PlaySound) {
+				if (optionStr == "tippen") {
+					new Audio(Options.SoundTippUrl).play();
+				}
+			}
+		}
+		$(document).on('keypress', function (e) {
+			//console.log(Options.PlaySound)
+			PlaySoundFunction('tippen'); // tipping sound
+		});
 	</script>
 
 </body>
