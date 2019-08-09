@@ -14,26 +14,23 @@
 
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-
 	<!-- Owl Carousel -->
 	<link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
 	<link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
-
 	<!-- Magnific Popup -->
 	<link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
-
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+	<!-- contextMENU -->
+		<link rel="stylesheet" href="res/contextMenu/jquery.contextMenu.min.css">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script src="res/contextMenu/jquery.contextMenu.min.js"></script>
+	<script src="res/contextMenu/jquery.ui.position.js"></script>
+	
+
 </head>
 
 <body style="background-color: #222427">
@@ -85,8 +82,46 @@
 		</div>
 	</nav>
 	<!-- /Nav -->
-
 	<!-- /Header -->
+
+<!-- MAIN MENU -->
+<div class="container-fluid">
+		<div id = "swMENU" class="row" style="margin-left: 15px; position: fixed; z-index:1">
+			<button id="btnToggle" type="button" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Menü ein- und ausklappen">+</button>
+			<span id="swMenuItems">
+				<span id="formatItems">
+					<button id="btnF" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Fett"><b>F</b></button>
+					<button id="btnI" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Kursiv"><i>K</i></button>
+					<button id="btnSub" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tiefgestellt">X<sub>S</sub></button>
+					<button id="btnSup" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Hochgestellt">X<sup>S</sup></button>
+					<button id="btnClean" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Formatierung löschen">[]</button>
+
+					<div class="btn-group" role="group">
+						<button id="btnFontBig" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Schrift vergrößern">+</button>
+						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Schrift
+						</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							<a class="dropdown-item" href="#"
+								onclick="$('#swTextEditor').css({'font-size':'16px','font-family':'Varela Round'});">Standard</a><br>
+							<a class="dropdown-item" href="#"
+								onclick="$('#swTextEditor').css({'font-size':'16px','font-family':'Courier New'});">Courier</a>
+						</div>
+						<button id="btnFontSmall" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Schrift verkleinern">-</button>
+					</div>
+				</span>
+
+				<button id="btnCode" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Schalte zwischen HTML und normaler Sicht">Code</button>
+				<button id="btnSound" type="button" class="btn btn-primary" style="opacity: 0.5" data-toggle="tooltip" data-placement="top" title="Tippgeräusch einschalten">Sound</button>
+				<button id="btnKIMode" type="button" class="btn btn-primary" style="opacity: 0.5" data-toggle="tooltip" data-placement="top" title="KI einschalten">KI</button>
+				<button id="btnZen" type="button" class="btn btn-primary" style="opacity: 0.5" data-toggle="tooltip" data-placement="top" title="ZEN Modus einschalten">Zen</button>
+
+			</span>
+		</div>
+
+		<!-- /MAIN MENU -->
+
 
 	<!-- header wrapper -->
 	<div class="header-wrapper bg-grey noZen"
@@ -102,43 +137,9 @@
 	</div>
 	<!-- /header wrapper -->
 
+	<div id="PositionForMenu"></div>
 
-
-	<div class="container-fluid">
-
-		<div class="row" style="margin-left: 8em; position: fixed; z-index:1">
-			<button id="btnToggle" type="button" class="btn btn-light">+</button>
-			<span id="swMenuItems">
-				<span id="formatItems">
-					<button id="btnF" type="button" class="btn btn-primary"><b>F</b></button>
-					<button id="btnI" type="button" class="btn btn-primary"><i>K</i></button>
-					<button id="btnSub" type="button" class="btn btn-primary">X<sub>S</sub></button>
-					<button id="btnSup" type="button" class="btn btn-primary">X<sup>S</sup></button>
-					<button id="btnClean" type="button" class="btn btn-primary">[]</button>
-
-					<div class="btn-group" role="group">
-						<button id="btnFontBig" type="button" class="btn btn-primary">+</button>
-						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-							Schrift
-						</button>
-						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							<a class="dropdown-item" href="#"
-								onclick="$('#swTextEditor').css({'font-size':'16px','font-family':'Varela Round'});">Standard</a><br>
-							<a class="dropdown-item" href="#"
-								onclick="$('#swTextEditor').css({'font-size':'16px','font-family':'Courier New'});">Courier</a>
-						</div>
-						<button id="btnFontSmall" type="button" class="btn btn-primary">-</button>
-					</div>
-				</span>
-
-				<button id="btnCode" type="button" class="btn btn-primary">Code</button>
-				<button id="btnSound" type="button" class="btn btn-primary" style="opacity: 0.5">Sound</button>
-				<button id="btnZen" type="button" class="btn btn-primary" style="opacity: 0.5">Zen</button>
-
-			</span>
-		</div>
-
+	
 		<div class="container sb-padding"></div>
 
 		<div class="row">
@@ -162,7 +163,7 @@
 							</h5>
 						</div>
 
-						<div id="collapse_0" class="card-collapse ">
+						<div id="collapse_0" class="card-collapse">
 							<div class="card-body" contenteditable="true">
 								<span class= "swTextFeld">
 								Anim pariatur cliche reprehenderit, enim ei mdod high life accusamus terry richardson ad
@@ -385,139 +386,16 @@
 	<!-- /Back to top -->
 
 	<!-- jQuery Plugins -->
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 
-	<!-- Simple Scripts -->
-	<script>
-		var Options = new Object();
-		Options.PlaySound = false;
-		Options.SoundTippUrl = 'media/tipp_sound.wav';
-
-		// SCRIPT fuer die Menuleiste
-		$("#btnToggle").click(function () {
-			$("#swMenuItems").toggle();
-		});
-
-		$("#btnF").click(function () {
-			document.execCommand("bold");
-		});
-
-		$("#btnI").click(function () {
-			document.execCommand("italic");
-		});
-
-		$("#btnSup").click(function () {
-			document.execCommand("superscript");
-		});
-
-		$("#btnSub").click(function () {
-			document.execCommand("subscript");
-		});
-
-		$("#btnClean").click(function () {
-			document.execCommand("removeFormat");
-		});
-
-		$("#btnFont").click(function () {
-			document.execCommand("fontName", false, "Comic Sans MS");
-		});
-
-		$("#btnFontBig").click(function () {
-			var fontSize = parseInt($("#swTextEditor").css("font-size"));
-			fontSize = fontSize + 1 + "px";
-			$("#swTextEditor").css({
-				'font-size': fontSize
-			});
-		});
-
-		$("#btnFontSmall").click(function () {
-			var fontSize = parseInt($("#swTextEditor").css("font-size"));
-			fontSize = fontSize - 1 + "px";
-			$("#swTextEditor").css({
-				'font-size': fontSize
-			});
-		});
-
-		$("#btnSound").click(function () {
-			var btnOpacity = $("#btnSound").css("opacity");
-			if (btnOpacity == 1) {
-				$("#btnSound").css({
-					"opacity": 0.5
-				});
-				Options.PlaySound = false;
-			} else {
-				$("#btnSound").css({
-					"opacity": 1
-				});
-				Options.PlaySound = true;
-			}
-		});
-
-		$("#btnZen").click(function () {
-			var btnOpacity = $("#btnZen").css("opacity");
-			if (btnOpacity == 1) {
-				$("#btnZen").css({"opacity": 0.5});
-				displayStr = 'inherit';
-			} else {
-				$("#btnZen").css({"opacity": 1});
-				displayStr = 'none';
-			}
-			$(".noZen").css({'display':displayStr});
-		});
-
-
-		$("#btnCode").click(function () {
-			var btnOpacity = $("#btnCode").css("opacity");
-			if (btnOpacity == 1) {
-				$("#btnCode").css({"opacity": 0.5});
-				$("#btnCode").text('Editor');
-				Options.PlaySound = false;
-
-				$('#swTextEditor').find('.swTextFeld').each(function(){
-					var curEl = this;
-					curEl.innerText = curEl.innerHTML;
-				})
-				//deacitvate buttons
-				$('#formatItems').find('.btn').each(function(){
-					var $curEl = $(this);
-					$curEl.attr('disabled', true);
-				})
-
-			} else {
-				$("#btnCode").css({"opacity": 1});
-				$("#btnCode").text('Code');
-				Options.PlaySound = true;
-
-				$('#swTextEditor').find('.swTextFeld').each(function(){
-					var curEl = this;
-					curEl.innerHTML = curEl.innerText;
-				})
-
-				//reacitvate buttons
-				$('#formatItems').find('.btn').each(function(){
-					var $curEl = $(this);
-					$curEl.attr('disabled', false);
-				})
-
-			}
-		});	
-
-		// SOUND FUNCTIONS ///////////////////////////
-		function PlaySoundFunction(optionStr) {
-			if (Options.PlaySound) {
-				if (optionStr == "tippen") {
-					new Audio(Options.SoundTippUrl).play();
-				}
-			}
-		}
-		$(document).on('keypress', function (e) {
-			//console.log(Options.PlaySound)
-			PlaySoundFunction('tippen'); // tipping sound
-		});
+	<!-- My Main Scripts -->
+	<script type="text/javascript" src="writeDarker.js"></script>
+	<script type="text/javascript">
+		MainStartup();
 	</script>
 
 </body>
