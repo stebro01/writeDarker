@@ -1,0 +1,132 @@
+body{
+    background-color: #222427;
+    color:lightslategray;
+    overflow-y: hidden;
+    max-width: 100vw;;
+}
+
+h1{
+    font-size: 1.2em;
+}
+
+.bg_image{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.05;
+    overflow-x: hidden;
+}
+
+.navbar_swTOP{
+    position:sticky;
+    height:40px;
+    background:none;
+}
+
+.scrollableCol{
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+}
+
+.btnNav{
+    background-color: #222427;
+    color:lightgray;
+    border: 0.8px solid #353738;
+    font-size: 0.8em;
+    outline: none;
+    height: 20px;
+    tab-index: -1;
+}
+
+.btnNav:hover{
+    background-color: #34363a;
+    color:white;
+}
+.btnNav:focus {
+    outline: none;
+  }
+
+.swColMain_H1{
+    color:whitesmoke;
+    font-size:0.8em;
+    width:100%;
+    margin-top:10px;
+    margin-bottom:10px;
+    border-bottom:1px solid #353738;
+}
+
+#swMainRow{
+    max-height: 80vh;
+}
+
+#swBottomNav{
+    border-top: 1px solid #353738;
+    color: lightgray;
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+#swStatusFeld{
+    margin-top:5px;
+    margin-bottom:5px;
+    padding-top:10px;
+    background-color: black;
+    min-width: 100%;
+    height: 40px;
+    text-align: center;
+    color:whitesmoke;
+}
+
+#swColMainProject{
+    max-height: calc(100vh - 150px);
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(52,58,64,1), rgba(34,36,39,0));
+}
+
+#swColMainNav{
+    border-right: 1px solid #353738 ;
+    max-height: calc(100vh - 150px);
+}
+
+#swColMainEditor{
+    height: 100vh;
+}
+
+#swColMainOptions{
+    border-left: 1px solid #353738 ;
+    padding-left:2px;
+    max-height: calc(100vh - 150px);
+}
+
+.swText_Feld{
+    margin-top: 10;
+    margin-bottom: 20px;
+}
+.swText_Feld:focus {
+    outline: none;
+    color:whitesmoke;
+  }
+
+.swText_H1{
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+.swText_H1:focus {
+    outline: none;
+    color:whitesmoke;
+  }
+
+#swNavList{
+    margin-top: 10px;
+    font-size: 0.8em;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+}
+
+.swContentBlock{
+    margin-top: 5px;
+    border-bottom: 1px solid #353738 ;
+}

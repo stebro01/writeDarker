@@ -1,214 +1,310 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<title>Write it darker</title>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="myStyle.css">
 
-	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 
-	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-	<!-- Owl Carousel -->
-	<link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
-	<link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
-	<!-- Magnific Popup -->
-	<link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
-	<!-- Font Awesome Icon -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
+    <title>Scientific Writer</title>
+    </head>
 
-	<!-- contextMENU -->
-		<link rel="stylesheet" href="res/contextMenu/jquery.contextMenu.min.css">
-		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-		<script src="res/contextMenu/jquery.contextMenu.min.js"></script>
-	<script src="res/contextMenu/jquery.ui.position.js"></script>
-	
-
-</head>
-
-<body style="background-color: #222427">
-	<!-- Header -->
-	<!-- Background Image -->
-	<div class="bg-img" style="background-image: url('./img/background1.jpg');">
-		<div class="overlay"></div>
-	</div>
-	<!-- /Background Image -->
-<!-- Nav -->
-<nav id="nav" class="navbar navbar-fixed-top nav-transparent noZen">
-	<div class="container">
-
-		<div class="navbar-header">
-			<!-- Logo -->
-			<div class="navbar-brand">
-				<a href="index.html">
-					<img class="logo" src="img/logo.png" alt="logo">
-					<img class="logo-alt" src="img/logo.png" alt="logo">
-				</a>
-			</div>
-			<!-- /Logo -->
-
-			<!-- Collapse nav button -->
-			<div class="nav-collapse">
-				<span></span>
-			</div>
-			<!-- /Collapse nav button -->
+    <body>
+		<div class="bg_image">
+			<img src="img/background1.jpg" alt="">
 		</div>
 
-		<!--  Main navigation  -->
-		<ul class="main-nav nav navbar-nav navbar-right">
-			<li><a href="#home">Home</a></li>
-			<li><a href="#about">Unser Ziel</a></li>
-			<li><a href="#service">Features</a></li>
-			<li><a href="#pricing">Preise</a></li>
-			<li><a href="#team">Team</a></li>
-			<li class="has-dropdown"><a href="#blog">Blog</a>
-				<ul class="dropdown">
-					<li><a href="blog-single.html#post_blog">poste im Blog</a></li>
-				</ul>
-			</li>
-			<li><a href="#contact">Kontakt</a></li>
-		</ul>
-		<!-- /Main navigation -->
+    	<!-- NAVBAR -->
+    	<nav class="navbar navbar_swTOP navbar-expand navbar-dark bg-dark">
+    		<a class="navbar-brand" href="#">HOME</a>
 
-	</div>
-</nav>
-<!-- /Nav -->
-<!-- /Header -->
+    		<div class="collapse navbar-collapse" id="navbarText">
+    			<ul class="navbar-nav mr-auto">
+    				<li class="nav-item active"></li>
+    				<div class="btn-group float-left">
+    					<button id="btnMenuWindows" type="button" class="btn btn-dark"><img src="img/logo_window.png"
+    							height="20px"></button>
+    				</div>
+    				</li>
+    			</ul>
 
+    			<button id="btnMenuWords" type="button" class="btn btn-dark float-right"><img src="img/logoFont.png"
+    					height="20px"></button>
+    			<button id="btnMenuOptions" type="button" class="btn btn-dark float-right"><img src="img/logoOpt.png"
+    					height="20px"></button>
+    		</div>
+    	</nav>
+    	<!-- /NAVBAR -->
 
-<div id="MainWindow" style="height: 80vh">
-	<div id="PositionForMenu"></div>
-	
-		<div class="container sb-padding"></div>
+    	<!-- STATUSBAR -->
+    	<div class="container" id="swStatusFeld">
+    		Das ist das Statusfeld [#swStatusFeld]
+    	</div>
+    	<!-- /STATUSBAR -->
 
-		<div id="RowControll" class="row">
-			<div id="ColControlLib" class="col-sm-2">
-				+ -
-			</div>
+    	<div id="PositionForMenu"></div>
 
-			<div id="ColControlNav" class="col-sm-2">
-				+ -
-			</div>
-
-			<div id="ColControlEdit" class="col-sm-6">
-				+ -
-			</div>
-
-			<div id="ColControlOpt" class="col-sm-2">
-				+ -
-			</div>
-
-		</div>
-
-
-		<div id="RowContent" class="row">
-
-			<div id="ColContentLib" class="col-sm-2">
-				<span class="noZen">
-					Projekte
-					<ul>
-						<li>idtem 1</li>
-						<li>item 2</li>
-						<li>item 3</li>
-					</ul>
-				</span>
-			</div>
-
-			<div id ="ColContentNav" class="col-sm-2">
-				<span class="noZen">
-				Navigation
-				<ul>
-					<li>idtem 1</li>
-					<li>item 2</li>
-					<li>item 3</li>
-				</ul>
-			</span>
-			</div>
-			<div id = "ColContentEditor" class="col-sm-6">
-
-								Anim pariatur cliche reprehenderit, enim ei mdod high life accusamus terry richardson ad
-								squid. 3 wolf
-								moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-								laborum eiusmod.
-								Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-								assumenda
-								shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-								nesciunt sapiente ea
-								proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-								farm-to-table, raw denim
-								aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-								VHS.
-
-			</div>
-			<div id = "ColContentOpt" class="col-sm-2">
-				<span class="noZen">
-				Options
-				<ul>
-					<li>idtem 1</li>
-					<li>item 2</li>
-					<li>item 3</li>
-				</ul>
-				</span>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-	<!-- Footer -->
-	<footer id="footer" class="sm-padding bg-dark noZen">
-		<!-- Container -->
-		<div class="container">
-			<!-- Row -->
-			<div class="row">
-				<div class="col-md-12">
-					<!-- footer follow -->
-					<ul class="footer-follow">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						</ul>
-					<!-- /footer follow -->
-
-					<!-- footer copyright -->
-					<div class="footer-copyright">
-						<p>Copyright © 2019. All Rights Reserved. Designed by SB</a></p>
-					</div>
-					<!-- /footer copyright -->
+    	<!-- MAINWINDOW -->
+    	<div class="container-fluid">
+    		<div id="swMainRow" class="row">
+    			<!-- PROJECT VIEW -->
+    			<div id="swColMainProject" class="col-sm-2">
+    				<div class="swColMain_H1">Project
+    					<div class="btn-group float-right">
+    						<button id="swColProjClose" class="btnNav">X</button>
+    						<button id="swColProjBig" class="btnNav">></button>
+    					</div>
+    				</div>
+    				CONTENT
 				</div>
-			</div>
-			<!-- /Row -->
-		</div>
-		<!-- /Container -->
+				
+    			<!-- NAVIGATOR VIEW -->
+    			<div id="swColMainNav" class="col-sm-2">
+    				<div class="swColMain_H1">
+    					Navigation
+    					<div class="btn-group float-right">
+    						<button id="swColNavClose" class="btnNav">X</button>
+    						<button id="swColNavBig" class="btnNav">></button>
+    					</div>
+					</div>
+					CONTENT
+					<button id="btnNavUpdate">UPDATE</button>
+					<div id="swNavList">
 
-	</footer>
-	<!-- /Footer -->
+					</div>
+    			</div>
 
-	<!-- Back to top -->
-	<div id="back-to-top"></div>
-	<!-- /Back to top -->
+    			<!-- EDITOR VIEW -->
+    			<div id="swColMainEditor" class="col-sm-6 scrollableCol">
+					<div class="swColMain_H1">Editor
+							<button id = "btnNewText" class="btnNav float-right">NEU</button>
+					</div>
+					<div id="swContent">
+							<div id="swContent_X" class="swContentBlock" style="display:none">
+									<button tabindex=-1 class="btnNav btnHideContent">▲</button>
+									<span contenteditable="true" class="swText_H1">Template</span>
+									<button tabindex=-1  class="btnNav btnRemoveContent float-right">X</button>
+									<div contenteditable="true" class="swText_Feld">
+										...
+									</div>
+								</div>
+						<div id="swContent_1" class="swContentBlock">
+							<button tabindex=-1  class="btnNav btnHideContent">▲</button>
+							<span contenteditable="true" class="swText_H1">H1</span>
+							<button tabindex=-1 class="btnNav btnRemoveContent float-right">X</button>
+							<div contenteditable="true" class="swText_Feld">
 
-	<!-- jQuery Plugins -->
-	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+								Ut imperdiet metus ac sem placerat, nec lacinia nulla dapibus. Maecenas accumsan enim ac urna
+								suscipit
+								pulvinar. Nulla vel elit mattis, fringilla dolor at, pharetra neque.</p>
 
-	<!-- My Main Scripts -->
-	<script type="text/javascript" src="writeDarker.js"></script>
-	<script type="text/javascript">
-		MainStartup();
+								Ut imperdiet metus ac sem placerat, nec lacinia nulla dapibus. Maecenas accumsan enim ac urna
+								suscipit
+								pulvinar. Nulla vel elit mattis, fringilla dolor at, pharetra neque.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+    			<!-- NAVIGATOR VIEW -->
+    			<div id="swColMainOptions" class="col-sm-2 scrollableCol">
+					<div class="swColMain_H1" style="text-align:center">
+							<button id="swColOptBig" class="btnNav float-left"><</button>
+							Options
+								<button id="swColOptClose" class="btnNav float-right">X</button>							 
+					</div> 
+					CONTENT
+				</div> 
+			</div> 
+		</div> 
+		<!-- /MAINWINDOW -->
+
+
+<footer >
+		<nav id = "swBottomNav" class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom">
+				<!-- Navbar content -->
+				Informationen:
+			</nav>
+</footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+    <!-- Optional JavaScript -->
+	<script>
+		var OPTIONS = new Object()
+		OPTIONS.colProjWidth = 2;
+		OPTIONS.colNavWidth = 2;
+		OPTIONS.colOptWidth = 2;
 
 		
+		$("#btnNavUpdate").click(function(){
+			updateNavList();
+		});
+
+		$(".swText_H1").focusout(function(){
+			updateNavList();
+		})
+
+		function updateNavList(){
+			$("#swNavList").html("");
+			var firstLoop = 0;
+			$("#swContent").find(".swText_H1").each(function(){
+				var $curEl = $(this);
+				firstLoop += 1;
+				if (firstLoop >1){
+					var str = "<p>"+$curEl.text()+"</p>";
+					$("#swNavList").html($("#swNavList").html() + str);
+					var str = "<p>"+$curEl.text()+"</p>";
+				}
+			})
+		}
+
+		$("#btnNewText").click(function(){
+			elX = $(this).parent().parent().find("#swContent_X").clone(true);
+			Nel = $("#swContent").find(".swText_Feld").length;
+			elX.attr("id", "swContent_"+Nel);
+			elX.appendTo("#swContent").show();
+			$("#swContent").find("#swContent_"+Nel).find(".swText_H1").text( Nel + ". Ueberschrift");
+
+			updateNavList();
+		});
+
+		$(".btnRemoveContent").click(function(){
+			$(this).parent().remove();
+			updateNavList();
+		});
+
+		$(".btnHideContent").click(function(){
+			$(this).parent().find('.swText_Feld').toggle();
+			if ($(this).parent().find('.swText_Feld').css('display')=='none')
+			{
+				$(this).parent().find('.btnHideContent').text('▼');
+			} else {
+				$(this).parent().find('.btnHideContent').text('▲');
+			}
+			console.log('click')
+
+		});
+
+		$("#btnMenuWindows").click(function(){
+			if ($("#swColMainProject").css('display') == 'none'){
+				$("#swColMainProject").show();
+				$("#swColMainNav").show();
+			}
+			else{
+				$("#swColMainProject").hide();
+				$("#swColMainNav").hide();
+			}
+			updateMainColWidth();
+		});
+
+		$("#btnMenuOptions").click(function(){
+			if ($("#swColMainOptions").css('display') == 'none'){
+				$("#swColMainOptions").show();
+			}
+			else{
+				$("#swColMainOptions").hide();
+			}
+			updateMainColWidth();
+		});
+
+		$("#swColOptBig").click(function(){
+			if (OPTIONS.colOptWidth <4){
+			OPTIONS.colOptWidth +=2
+			$("#swColOptBig").text(">");
+			}
+			else{
+			OPTIONS.colOptWidth = 2;
+			$("#swColOptBig").text("<");
+			}
+			updateMainColWidth();
+		});
+
+		$("#swColNavBig").click(function(){
+			if (OPTIONS.colNavWidth <4){
+			OPTIONS.colNavWidth +=2
+			$("#swColNavBig").text("<");
+			}
+			else{
+			OPTIONS.colNavWidth = 2;
+			$("#swColNavBig").text(">");
+			}
+			updateMainColWidth();
+		});
+
+		$("#swColProjBig").click(function(){
+			if (OPTIONS.colProjWidth <4){
+			OPTIONS.colProjWidth +=2
+			$("#swColProjBig").text("<");
+			}
+			else{
+			OPTIONS.colProjWidth = 2;
+			$("#swColProjBig").text(">");
+			}
+			updateMainColWidth();
+		});
+
+		$("#swColProjClose").click(function(){
+			$("#swColMainProject").hide();
+			updateMainColWidth();
+		});
+
+		$("#swColNavClose").click(function(){
+			$("#swColMainNav").hide();
+			updateMainColWidth();
+		});
+
+		$("#swColOptClose").click(function(){
+			$("#swColMainOptions").hide();
+			updateMainColWidth();
+		});
+
+		function updateMainColWidth(){
+			if ($("#swColMainOptions").css('display') == 'none')
+				colOpt = 0;
+			else
+				colOpt = OPTIONS.colOptWidth;
+
+			if ($("#swColMainProject").css('display') == 'none')
+				colProj = 0;
+			else
+				colProj = OPTIONS.colProjWidth;
+
+			if ($("#swColMainNav").css('display') == 'none')
+				colNav = 0;
+			else
+				colNav = OPTIONS.colNavWidth;
+
+			//now remove class and set new
+			$("#swColMainProject").removeClass($("#swColMainProject").attr('class'));
+			$("#swColMainProject").addClass("col-sm-"+colProj);
+
+			$("#swColMainNav").removeClass($("#swColMainNav").attr('class'));
+			$("#swColMainNav").addClass("col-sm-"+colNav);
+
+			$("#swColMainOptions").removeClass($("#swColMainOptions").attr('class'));
+			$("#swColMainOptions").addClass("col-sm-"+colOpt);
+
+			var colW = 12-(colOpt+colNav+colProj);
+			$("#swColMainEditor").removeClass($("#swColMainEditor").attr('class'));
+			$("#swColMainEditor").addClass("scrollableCol col-sm-"+colW);
+		}
+
+
+		updateNavList();
 	</script>
 
-</body>
 
+  </body>
 </html>
