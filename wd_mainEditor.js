@@ -47,73 +47,77 @@ var OPTIONS = new Object()
             }
         }
 
-        //DATA STORAGE LOCALLY
-        $(".btnStore").click(function(){
-            var idStr = $(this).attr("id");
-            switch(idStr){
-                case "btnProjStore":
-                        logDebug("storeLocally");
+function storeLocal(){
+    var content = new Array();
+    $elH1 = $("#swMainEditor").find(".swText_H1");
+    $elTXT = $("#swMainEditor").find(".swText_Feld");
 
-                        var content = new Array();
-                        $elH1 = $("#swMainEditor").find(".swText_H1");
-                        $elTXT = $("#swMainEditor").find(".swText_Feld");
+    for (i = 1; i<$elH1.length; i++){
+        var data = new Object();
+        data.H1 = $elH1[i].innerHTML;
+        data.TXT = $elTXT[i].innerHTML;
+        content.push(data);
+    }
 
-                        for (i = 1; i<$elH1.length; i++){
-                            var data = new Object();
-                            data.H1 = $elH1[i].innerHTML;
-                            data.TXT = $elTXT[i].innerHTML;
-                            content.push(data);
-                        }
+    var wd_STORAGE = new Object();
+    wd_STORAGE.content = content;
+    wd_STORAGE.OPTIONS = OPTIONS;
 
-                        var wd_STORAGE = new Object();
-                        wd_STORAGE.content = content;
-                        wd_STORAGE.OPTIONS = OPTIONS;
+    window.localStorage.setItem(OPTIONS.Store_LocalName, JSON.stringify(wd_STORAGE));
+    $("#swBottomNavTxt").text(" lokal gespeichert in "+OPTIONS.Store_LocalName);
+}
 
-                        // check for previously stored data
-                        var oldDataFound = false;
-                        for (i=0; i<window.localStorage.length; i++){
-                            if (window.localStorage.key(i) == OPTIONS.Store_LocalName)
-                                oldDataFound = true;
-                        }
+//DATA STORAGE LOCALLY
+$(".btnStore").click(function(){
+    var idStr = $(this).attr("id");
+    switch(idStr){
+        case "btnProjStore":
+                logDebug("storeLocally");
 
-                        if (oldDataFound)
-                        alert("hi")
+                // check for previously stored data
+                var oldDataFound = false;
+                for (i=0; i<window.localStorage.length; i++){
+                    if (window.localStorage.key(i) == OPTIONS.Store_LocalName)
+                        oldDataFound = true;
+                }
 
-                        window.localStorage.setItem(OPTIONS.Store_LocalName, JSON.stringify(wd_STORAGE));
-                        $("#swBottomNavTxt").text(" lokal gespeichert in "+OPTIONS.Store_LocalName);
+                if (oldDataFound){
+                    $('#swModalSave').modal('show');
+                } else{
+                    storeLocal();
+                }
+            break
+        case "btnProjLoad":
+                logDebug("loadLocally")
+                wd_STORAGE = JSON.parse(window.localStorage.getItem('wd_STORAGE'));
+                console.log(wd_STORAGE)
 
-                    break
-                case "btnProjLoad":
-                        logDebug("loadLocally")
-                        wd_STORAGE = JSON.parse(window.localStorage.getItem('wd_STORAGE'));
-                        console.log(wd_STORAGE)
+            break
+        default:
+            logDebug(idStr+": id not found");
+            break
+    }
+});
 
-                    break
-                default:
-					logDebug(idStr+": id not found");
-					break
-            }
-        });
+//UPDATE NAVLIST WHEN H:EADING WAS LEFT
+$(".swText_H1").focusout(function(){
+    updateNavList();
+})
 
-        //UPDATE NAVLIST WHEN H:EADING WAS LEFT
-		$(".swText_H1").focusout(function(){
-            updateNavList();
-		})
-
-		function updateNavList(){
-			$("#swNavList").html("");
-			var firstLoop = 0;
-			$("#swContent").find(".swText_H1").each(function(){
-				var $curEl = $(this);
-				firstLoop += 1;
-				if (firstLoop >1){
-					var str = "<p>"+$curEl.text()+"</p>";
-					$("#swNavList").html($("#swNavList").html() + str);
-					var str = "<p>"+$curEl.text()+"</p>";
-				}
-            })
-            logDebug("updateNavList");
-		}
+function updateNavList(){
+    $("#swNavList").html("");
+    var firstLoop = 0;
+    $("#swContent").find(".swText_H1").each(function(){
+        var $curEl = $(this);
+        firstLoop += 1;
+        if (firstLoop >1){
+            var str = "<p>"+$curEl.text()+"</p>";
+            $("#swNavList").html($("#swNavList").html() + str);
+            var str = "<p>"+$curEl.text()+"</p>";
+        }
+    })
+    logDebug("updateNavList");
+}
 
 		$("#btnNewText").click(function(){
 			elX = $(this).parent().parent().find("#swContent_X").clone(true);
