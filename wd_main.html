@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<!-- Required meta tags -->
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  	<!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="css/bootstrap.min.css">
+	  <link rel="stylesheet" href="res/contextMenu/jquery.contextMenu.min.css">
+
+  	<!-- MAIN CSS -->
+  	<link rel="stylesheet" href="myStyle.css">
+  	<title>Scientific Writer</title>
+  </head>
+
+    <body>
+		<div class="bg_image">
+			<img src="img/background1.jpg" alt="">
+		</div>
+
+    	<!-- NAVBAR -->
+    	<nav class="navbar navbar_swTOP navbar-expand navbar-dark bg-dark noZen">
+    		<a class="navbar-brand" href="#">HOME</a>
+
+    		<div class="collapse navbar-collapse" id="navbarText">
+    			<ul class="navbar-nav mr-auto">
+    				<li class="nav-item active"></li>
+    				<div class="btn-group float-left">
+    					<button id="btnMenuWindows" type="button" class="btn btn-dark btnMain"><img src="img/logo_window.png"
+    							height="20px"></button>
+    				</div>
+    				</li>
+    			</ul>
+
+    			<button id="btnMenuWords" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoFont.png"
+    					height="20px"></button>
+    			<button id="btnMenuOptions" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoOpt.png"
+    					height="20px"></button>
+    		</div>
+    	</nav>
+    	<!-- /NAVBAR -->
+
+	<!-- MAIN MENU -->
+	<div class="container-fluid" id="swMenuFont">
+		<span id="swMenuFont_toggle" class="noZen">
+			<span id="formatItems">
+				<button id="btnF" type="button" class="btn btn-dark btnMenuFont" title="Fett"><b>F</b></button>
+				<button id="btnI" type="button" class="btn btn-dark btnMenuFont" title="Kursiv"><i>K</i></button>
+				<button id="btnSub" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
+					title="Tiefgestellt">X<sub>S</sub></button>
+				<button id="btnSup" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
+					title="Hochgestellt">X<sup>S</sup></button>
+				<button id="btnClean" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip"
+					data-placement="top" title="Formatierung löschen">[]</button>
+
+				<div class="btn-group" role="group">
+					<button id="btnFontBig" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip"
+						data-placement="top" title="Schrift vergrößern">+</button>
+					<button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						Schrift
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<a class="dropdown-item" href="#"
+							onclick="$('#swContent').css({'font-size':'16px','font-family':'Segoe'});">Standard</a><br>
+						<a class="dropdown-item" href="#"
+							onclick="$('#swContent').css({'font-size':'16px','font-family':'Courier New'});">Courier</a>
+					</div>
+					<button id="btnFontSmall" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip"
+						data-placement="top" title="Schrift verkleinern">-</button>
+				</div>
+			</span>
+			<button id="btnCode" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
+				title="Schalte zwischen HTML und normaler Sicht">Code</button>
+			<button id="btnSound" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
+				data-placement="top" title="Tippgeräusch einschalten">Sound</button>
+			<button id="btnKIMode" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
+				data-placement="top" title="KI einschalten">KI</button>
+			<button id="btnZen" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
+				data-placement="top" title="ZEN Modus einschalten">Zen</button>
+		</span>
+		<button id="btnMenuFont_toggle" type="button" class="btn btn-light btnMenuFont" data-toggle="tooltip"
+			data-placement="top" title="Menü ein- und ausklappen">+</button>
+	</div>
+	<!-- /MAIN MENU -->
+
+	<!-- STATUSBAR -->
+	<div class="container noZen" id="swStatusFeld">
+		Das ist das Statusfeld [#swStatusFeld]
+	</div>
+	<!-- /STATUSBAR -->
+
+	<div id="PositionForMenu"></div>
+
+	<!-- MAINWINDOW -->
+	<div class="container-fluid">
+		<div id="swMainRow" class="row">
+			<!-- PROJECT VIEW -->
+			<div id="swMainProject" class="col-sm-2">
+				<div class="noZen">
+					<div class="swMain_H1">Project
+						<div class="btn-group float-right">
+							<button id="swColProjClose" class="btnNav">X</button>
+							<button id="swColProjBig" class="btnNav">></button>
+						</div>
+					</div>
+					<p class="swMain_H2">CONTENT</p>
+					<div class="swMain_H2" style="border: 1px solid; margin-top: 50px">
+						Speichere lokal<br>
+						<button id="btnProjStore" type="button" class="btn btn-dark btn-sm btnStore">SAVE</button>
+						<button id="btnProjLoad" type="button" class="btn btn-dark btn-sm btnStore">Load</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- NAVIGATOR VIEW -->
+			<div id="swMainNav" class="col-sm-2">
+				<div class="noZen">
+					<div class="swMain_H1">
+						Navigation
+						<div class="btn-group float-right">
+							<button id="swColNavClose" class="btnNav">X</button>
+							<button id="swColNavBig" class="btnNav">></button>
+						</div>
+					</div>
+					<p class="swMain_H2">CONTENT</p>
+					<div id="swNavList">
+
+					</div>
+				</div>
+			</div>
+
+			<!-- EDITOR VIEW -->
+			<div id="swMainEditor" class="col-sm-6 scrollableCol">
+				<div class="swMain_H1">Editor
+					<button id="btnNewText" class="btnNav float-right">NEU</button>
+				</div>
+				<div id="swContent">
+					<div id="swContent_X" class="swContentBlock" style="display:none">
+						<button tabindex=-1 class="btnNav btnHideContent">▲</button>
+						<span contenteditable="true" class="swText_H1">Template</span>
+						<button tabindex=-1 class="btnNav btnRemoveContent float-right">X</button>
+						<div contenteditable="true" class="swText_Feld">
+							...
+						</div>
+					</div>
+					<div id="swContent_1" class="swContentBlock">
+						<button tabindex=-1 class="btnNav btnHideContent">▲</button>
+						<span contenteditable="true" class="swText_H1">H1</span>
+						<button tabindex=-1 class="btnNav btnRemoveContent float-right">X</button>
+						<div contenteditable="true" class="swText_Feld">
+
+							Ut imperdiet metus ac sem placerat, nec lacinia nulla dapibus. Maecenas accumsan enim ac urna
+							suscipit
+							pulvinar. Nulla vel elit mattis, fringilla dolor at, pharetra neque.</p>
+
+							Ut imperdiet metus ac sem placerat, nec lacinia nulla dapibus. Maecenas accumsan enim ac urna
+							suscipit
+							pulvinar. Nulla vel elit mattis, fringilla dolor at, pharetra neque.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- NAVIGATOR VIEW -->
+			<div id="swMainOptions" class="col-sm-2">
+				<div class="noZen">
+					<div class="swMain_H1" style="text-align:center">
+						<button id="swColOptBig" class="btnNav float-left"><</button> Options <button id="swColOptClose" class="btnNav float-right">X
+						</button>
+					</div>
+					<p class="swMain_H2">CONTENT</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /MAINWINDOW -->
+
+
+<footer >
+		<nav id = "swBottomNav" class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom noZen">
+				<!-- Navbar content -->
+				<div>Informationen: </div>
+				<div id="swBottomNavTxt" style="margin-left: 20px"></div>
+			</nav>
+</footer>
+
+    <!-- QUESTION MODALS -->
+
+<div class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Es existieren bereits lokale Daten</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>SPEICHERN</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Speichern</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="res/contextMenu/jquery.contextMenu.js"></script>
+	
+
+	
+    <!-- Optional JavaScript -->
+	<script src="wd_mainEditor.js"></script>
+	<script src="wd_menuFont.js"></script>
+		
+	<script>
+		$( document ).ready(function() {
+			updateNavList();
+			updateMenuFont();
+			updateCSS();
+			logStatus("fertig, alles wurde vorbereitet");
+			logDebug("debuging Mode on");
+		});
+		
+	
+	</script>
+
+  </body>
+</html>
