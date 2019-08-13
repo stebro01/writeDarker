@@ -15,3 +15,8 @@ $(".swProjectRow").click(function(){
 $(".swProjectRow").on("dblclick", function(){
     logDebug("dbl:swProjects"+$(this).attr("id"))
 })
+
+$("#swProjNew").click(function(){
+    logDebug("btn:"+$(this).attr("id"))
+})
+

@@ -100,7 +100,7 @@ function loadLocal(){
     for (i=0; i<content.length; i++){
         addEntryEditor_1(content[i].ID, content[i].H1, content[i].TXT);
     }
-    logInfo(OPTIONS.Store_LocalName+ "geladen, " + content.length + " Einträge [timestamp: " + wd_STORAGE.lastSync+"]");
+    logInfo(OPTIONS.Store_LocalName+ " geladen, " + content.length + " Einträge [timestamp: " + wd_STORAGE.lastSync+"]");
 }
 
 function storeLocal(){
