@@ -1,12 +1,9 @@
+/* BODY AND BG IMAGE */
 body{
     background-color: #222427;
     color:lightslategray;
     overflow-y: hidden;
     max-width: 100vw;;
-}
-
-h1{
-    font-size: 1.2em;
 }
 
 .bg_image{
@@ -20,39 +17,65 @@ h1{
     z-index:  -1;;
 }
 
+/* NAVIGATION BAR  */
 .navbar_swTOP{
     position:sticky;
     height:40px;
     background:none;
 }
 
-.scrollableCol{
-    height: calc(100vh - 150px);
-    overflow-y: scroll;
+/* FONT MENU BAR  */
+#swMenuFont{
+    text-align: center; 
+    margin-top: 5px;
+    display: none;
 }
 
-.btnNav{
+/* STATUSFELD  */
+#swStatusFeld{
+    margin-top:5px;
+    margin-bottom:5px;
+    padding-top:10px;
+    background-color: black;
+    min-width: 100%;
+    height: 40px;
+    text-align: center;
+    color:whitesmoke;
+}
+
+/*buttons uns so */
+.btnNav, .btnHideContent, .btnRemoveContent{
     color:lightgray;
     border: 0.8px solid #353738;
-    
+    background:transparent;
     font-size: 0.8em;
     outline: none;
     height: 20px;
     tab-index: -1;
 }
 
-.btnNav:hover{
+.btnNav:hover, .btnHideContent:hover, .btnRemoveContent:hover{
     background-color: #34363a;
     color:white;
 }
-.btnNav:focus {
+.btnNav:focus{
     outline: none;
   }
+
+
+
+
+ /*MAIN WINDOW SETTINGS */
+/*UEBERSCHRIFTEN UND TEXT*/
+
+.scrollableCol{
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+}
 
 .swMain_H1{
     color:whitesmoke;
     font-size:0.8em;
-    
     margin-top:10px;
     margin-bottom:10px;
     border-bottom:1px solid #353738;
@@ -67,53 +90,86 @@ h1{
     border-bottom:0.5px solid #353738;
 }
 
-#swMenuFont{
-    text-align: center; 
-    margin-top: 5px;
-    display: none;
+.swProj_H2{
+    color:whitesmoke;
+    font-size:0.7em;
+    margin-top:20px;
+    margin-bottom:10px;
+    text-align:center;
+    border-bottom:0.5px solid #222427;
 }
 
+/*das ist die MAIN ROW fur alle GRIDS des Main Window*/
 #swMainRow{
     max-height: 80vh;
 }
 
-#swBottomNav{
-    border-top: 1px solid #353738;
-    color: lightgray;
-    font-size: 0.8em;
-    opacity: 0.8;
-}
-
-#swStatusFeld{
-    margin-top:5px;
-    margin-bottom:5px;
-    padding-top:10px;
-    background-color: black;
-    min-width: 100%;
-    height: 40px;
-    text-align: center;
-    color:whitesmoke;
-}
-
+/*PROJECT*/
 #swMainProject{
     max-height: calc(100vh - 150px);
     opacity: 1;
     background: linear-gradient(180deg, rgba(52,58,64,1), rgba(34,36,39,0));
 }
 
+.swProjectList{
+    margin-top: 10px;
+    font-size: 1em;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+    list-style-type: none; 
+    margin: 0; padding: 0; 
+    width: 100%;
+}
+
+.swProjectRow{
+    color: #778899;
+    margin-top: 10px;
+    user-select: none;
+    z-index: 1000;
+ }
+ .swProjectRow:hover{
+    color: white;
+    background-color:  #222427;
+  }
+
+  .swProjSave{
+    border: 1px solid #222427; 
+    margin-top: 40vh;
+
+    padding:4px;
+}
+
+/*NAVBAR*/
 #swMainNav{
     border-right: 1px solid #353738 ;
     max-height: calc(100vh - 150px);
 }
-
-#swMainEditor{
-    height: 100vh;
+#swNavList{
+    margin-top: 10px;
+    font-size: 0.8em;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+    list-style-type: none; 
+    margin: 0; padding: 0; 
+    width: 100%;
 }
+.swNavTofRow{
+    color: #778899;
+    margin-top: 10px;
+    user-select: none;
+    z-index: 1000;
+ }
+ .swNavTofRow:hover{
+    color: white;
+    background-color:  #353738;
+  }
 
-#swMainOptions{
-    border-left: 1px solid #353738 ;
-    padding-left:2px;
-    max-height: calc(100vh - 150px);
+
+/*EDITOR*/
+#swMainEditor{
+    
 }
 
 .swText_Feld{
@@ -135,15 +191,23 @@ h1{
     color:whitesmoke;
   }
 
-#swNavList{
-    margin-top: 10px;
-    font-size: 0.8em;
-    text-overflow: ellipsis; 
-    overflow: hidden; 
-    white-space: nowrap;
-}
-
 .swContentBlock{
     margin-top: 5px;
     border-bottom: 1px solid #353738 ;
+}
+
+/*OPTIONS*/
+#swMainOptions{
+    border-left: 1px solid #353738 ;
+    padding-left:2px;
+    max-height: calc(100vh - 150px);
+}
+
+
+/* MAVBAR BOTTOM INFORMATION:*/
+#swBottomNav{
+    border-top: 1px solid #353738;
+    color: lightgray;
+    font-size: 0.8em;
+    opacity: 0.8;
 }

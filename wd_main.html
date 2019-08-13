@@ -21,7 +21,7 @@
 
     	<!-- NAVBAR -->
     	<nav class="navbar navbar_swTOP navbar-expand navbar-dark bg-dark noZen">
-    		<a class="navbar-brand" href="#">HOME</a>
+    		<a class="navbar-brand" href="#">writeDarker</a>
 
     		<div class="collapse navbar-collapse" id="navbarText">
     			<ul class="navbar-nav mr-auto">
@@ -33,8 +33,7 @@
     				</li>
     			</ul>
 
-    			<button id="btnMenuWords" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoFont.png"
-    					height="20px"></button>
+    			<button id="btnMenuWords" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoFont.png" height="20px"></button>
     			<button id="btnMenuOptions" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoOpt.png"
     					height="20px"></button>
     		</div>
@@ -74,11 +73,11 @@
 			<button id="btnCode" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
 				title="Schalte zwischen HTML und normaler Sicht">Code</button>
 			<button id="btnSound" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
-				data-placement="top" title="Tippgeräusch einschalten">Sound</button>
+				data-placement="top" title="Tippgeräusch einschalten"><img src="img/logoSound.png" height="20px"></button>
 			<button id="btnKIMode" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
 				data-placement="top" title="KI einschalten">KI</button>
 			<button id="btnZen" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
-				data-placement="top" title="ZEN Modus einschalten">Zen</button>
+				data-placement="top" title="ZEN Modus einschalten"><img src="img/logoZen.png" height="20px"></button>
 		</span>
 		<button id="btnMenuFont_toggle" type="button" class="btn btn-light btnMenuFont" data-toggle="tooltip"
 			data-placement="top" title="Menü ein- und ausklappen">+</button>
@@ -99,14 +98,31 @@
 			<!-- PROJECT VIEW -->
 			<div id="swMainProject" class="col-sm-2">
 				<div class="noZen">
-					<div class="swMain_H1">Project
+					<div class="swMain_H1">Projekte
 						<div class="btn-group float-right">
 							<button id="swColProjClose" class="btnNav">X</button>
 							<button id="swColProjBig" class="btnNav">></button>
 						</div>
 					</div>
-					<p class="swMain_H2">CONTENT</p>
-					<div class="swMain_H2" style="border: 1px solid; margin-top: 50px">
+					<p class="swProj_H2">Inhalt</p>
+				<div>
+					<ul class="swProjectList">
+						<li id="swProjAll" class="swProjectRow">Alles</li>
+						<li id="swProjTrash" class="swProjectRow">Papierkorb</li>
+					</ul>
+				</div>
+
+				<div class="swProj_H2">Eigene</div>
+				<div>
+						<ul class="swProjectList" id="swProjects">
+							<li id="swProjTOF_1" class="swProjectRow">Projekt 1</li>
+							<li id="swProjTOF_2" class="swProjectRow">Projekt 2</li>
+							<li id="swProjTOF_3" class="swProjectRow">Projekt 3</li>
+						</ul>
+					</div>
+
+
+					<div class="swProj_H2 swProjSave">
 						Speichere lokal<br>
 						<button id="btnProjStore" type="button" class="btn btn-dark btn-sm btnStore">SAVE</button>
 						<button id="btnProjLoad" type="button" class="btn btn-dark btn-sm btnStore">Load</button>
@@ -124,9 +140,11 @@
 							<button id="swColNavBig" class="btnNav">></button>
 						</div>
 					</div>
-					<p class="swMain_H2">CONTENT</p>
-					<div id="swNavList">
-
+					<p class="swMain_H2"></p>
+					<div>
+						<ul id="swNavList">
+							<li id="swNavTOF_1" class="ui-state-default swNavTofRow" onclick="swNavTOF_click(this)">Item 2</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -138,17 +156,17 @@
 				</div>
 				<div id="swContent">
 					<div id="swContent_X" class="swContentBlock" style="display:none">
-						<button tabindex=-1 class="btnNav btnHideContent">▲</button>
+						<button tabindex=-1 class="btnHideContent">▲</button>
 						<span contenteditable="true" class="swText_H1">Template</span>
-						<button tabindex=-1 class="btnNav btnRemoveContent float-right">X</button>
+						<button tabindex=-1 class="btnRemoveContent float-right">X</button>
 						<div contenteditable="true" class="swText_Feld">
 							...
 						</div>
 					</div>
 					<div id="swContent_1" class="swContentBlock">
-						<button tabindex=-1 class="btnNav btnHideContent">▲</button>
+						<button tabindex=-1 class="btnHideContent">▲</button>
 						<span contenteditable="true" class="swText_H1">H1</span>
-						<button tabindex=-1 class="btnNav btnRemoveContent float-right">X</button>
+						<button tabindex=-1 class="btnRemoveContent float-right">X</button>
 						<div contenteditable="true" class="swText_Feld">
 
 							Ut imperdiet metus ac sem placerat, nec lacinia nulla dapibus. Maecenas accumsan enim ac urna
@@ -161,6 +179,7 @@
 						</div>
 					</div>
 				</div>
+				<div class="dummy" style="height:80vh"></div>
 			</div>
 
 			<!-- NAVIGATOR VIEW -->
@@ -170,7 +189,7 @@
 						<button id="swColOptBig" class="btnNav float-left"><</button> Options <button id="swColOptClose" class="btnNav float-right">X
 						</button>
 					</div>
-					<p class="swMain_H2">CONTENT</p>
+					
 				</div>
 			</div>
 		</div>
@@ -215,20 +234,24 @@
     <script src="js/popper.min.js" ></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="res/contextMenu/jquery.contextMenu.js"></script>
+	<script src="js/jquery-ui.js"></script>
 	
 
 	
     <!-- Optional JavaScript -->
 	<script src="wd_mainEditor.js"></script>
 	<script src="wd_menuFont.js"></script>
+	<script src="wd_projectManager.js"></script>
 		
 	<script>
 		$( document ).ready(function() {
-			updateNavList();
 			updateMenuFont();
 			updateCSS();
 			logStatus("fertig, alles wurde vorbereitet");
 			logDebug("debuging Mode on");
+			loadLocal();
+			//updateNavList();
+			
 		});
 		
 	

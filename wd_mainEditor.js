@@ -32,6 +32,8 @@ var OPTIONS = new Object()
         OPTIONS.CodeView = false;
 
         OPTIONS.Store_LocalName = "wd_STORAGE";
+        OPTIONS.tmpDragPosStart = [];
+        OPTIONS.tmpDragPosEnd = [];
         
         function logStatus(strText){
                 $("#swStatusFeld").text(strText);
@@ -47,25 +49,9 @@ var OPTIONS = new Object()
             }
         }
 
-function storeLocal(){
-    var content = new Array();
-    $elH1 = $("#swMainEditor").find(".swText_H1");
-    $elTXT = $("#swMainEditor").find(".swText_Feld");
-
-    for (i = 1; i<$elH1.length; i++){
-        var data = new Object();
-        data.H1 = $elH1[i].innerHTML;
-        data.TXT = $elTXT[i].innerHTML;
-        content.push(data);
-    }
-
-    var wd_STORAGE = new Object();
-    wd_STORAGE.content = content;
-    wd_STORAGE.OPTIONS = OPTIONS;
-
-    window.localStorage.setItem(OPTIONS.Store_LocalName, JSON.stringify(wd_STORAGE));
-    $("#swBottomNavTxt").text(" lokal gespeichert in "+OPTIONS.Store_LocalName);
-}
+        function logInfo(strText){
+            $("#swBottomNavTxt").text(strText);
+        }
 
 //DATA STORAGE LOCALLY
 $(".btnStore").click(function(){
@@ -88,10 +74,8 @@ $(".btnStore").click(function(){
                 }
             break
         case "btnProjLoad":
-                logDebug("loadLocally")
-                wd_STORAGE = JSON.parse(window.localStorage.getItem('wd_STORAGE'));
-                console.log(wd_STORAGE)
-
+                logDebug("loadLocally");
+                loadLocal();
             break
         default:
             logDebug(idStr+": id not found");
@@ -99,171 +83,313 @@ $(".btnStore").click(function(){
     }
 });
 
+function loadLocal(){
+    wd_STORAGE = JSON.parse(window.localStorage.getItem(OPTIONS.Store_LocalName));
+
+    // restore the option
+    OPTIONS = wd_STORAGE.OPTIONS;
+    updateMainColWidth();
+
+    // restore content
+    content = wd_STORAGE.content;
+
+    // first empty the editor and then fill it again
+    emptyEditor_1();
+    for (i=0; i<content.length; i++){
+        addEntryEditor_1(content[i].ID, content[i].H1, content[i].TXT);
+    }
+    logInfo(OPTIONS.Store_LocalName+ "geladen, " + content.length + " Einträge [timestamp: " + wd_STORAGE.lastSync+"]");
+}
+
+function storeLocal(){
+    var content = new Array();
+    $content = $("#swMainEditor").find(".swContentBlock");
+    
+    for (i = 1; i<$content.length; i++){
+        var data = new Object();
+        data.H1 = $($content[i]).find(".swText_H1").text();
+        data.TXT = $($content[i]).find(".swText_Feld").text();
+        data.ID = $($content[i]).attr("id");
+        content.push(data);
+    }
+
+    var wd_STORAGE = new Object();
+    wd_STORAGE.content = content;
+    wd_STORAGE.OPTIONS = OPTIONS;
+    wd_STORAGE.lastSync = new Date();
+
+    window.localStorage.setItem(OPTIONS.Store_LocalName, JSON.stringify(wd_STORAGE));
+    logInfo(" lokal gespeichert in "+OPTIONS.Store_LocalName);
+}
+
+// WORKING WITH THE EDITOR WINDOW////////
+// addEntryEditor_1(idStr, h1Str, txtStr ) -> ADD AN ENTRY (i.e. addEntryEditor_1([],[],[]))
+// 2) emptyEditor_1() -> REMOVE ALL ENTRIES
+function addEntryEditor_1(idStr, h1Str, txtStr ){
+    if (idStr == ""){
+        Nel = $("#swContent").find(".swText_Feld").length;
+        idStr = "swContent_"+Nel;
+    }
+    if (h1Str == ""){
+        Nel = $("#swContent").find(".swText_Feld").length;
+        h1Str = Nel + ". Ueberschrift";
+    }
+
+    $elTemp = $("#swContent_X").clone(true);
+    $($elTemp).find(".swText_H1").text(h1Str);
+    $($elTemp).find(".swText_Feld").text(txtStr);
+    $($elTemp).css({"display":"block"});
+    $($elTemp).attr("id", idStr);
+    $("#swContent").append($elTemp);
+    updateNavList();
+}
+
+function emptyEditor_1(){
+    // clone the first element and empty the content
+    $elTemp = $("#swContent_X").clone(true);
+    $("#swContent").empty();
+    $("#swContent").append($elTemp);
+    // now add the first element again
+}
+
+
+//////////////////////////////////////////////////////////////////
+// BUTTONS
+//////////////////////////////////////////////////////////////////
+$(".btnMain").click(function(){
+    var idStr = $(this).attr("id");
+    switch(idStr){
+        case "btnMenuWindows":
+            if ($("#swMainProject").css('display') == 'none'){
+                OPTIONS.Layout.swMainProject = true;
+                OPTIONS.Layout.swMainNav= true;
+            }
+            else{
+                OPTIONS.Layout.swMainProject = false;
+                OPTIONS.Layout.swMainNav= false;
+            }
+            updateMainColWidth();
+            break
+        case "btnMenuOptions":
+            if ($("#swMainOptions").css('display') == 'none'){
+                OPTIONS.Layout.swMainOpt = true;
+            }
+            else{
+                OPTIONS.Layout.swMainOpt = false;
+            }
+            updateMainColWidth();
+            break
+        case "btnMenuWords":
+            if ($("#swMenuFont").css('display') == 'none'){
+                OPTIONS.Layout.MenuFont.enabled = true;
+            }
+            else{
+                OPTIONS.Layout.MenuFont.enabled = false;
+            }
+            updateMainColWidth();
+            break;
+        default:
+            logDebug(idStr+"[btnMain]: id not found");
+            break
+    }
+})
+
+$(".btnNav").click(function(){
+    var idStr = $(this).attr("id");
+    switch(idStr){
+        case "swColProjClose":
+            OPTIONS.Layout.swMainProject = false;
+            updateMainColWidth();
+            break;
+        case "swColProjBig":
+            if (OPTIONS.Layout.swMainProject_Width <4){
+                OPTIONS.Layout.swMainProject_Width +=2
+                $("#swColProjBig").text("<");
+                }
+                else{
+                OPTIONS.Layout.swMainProject_Width = 2;
+                $("#swColProjBig").text(">");
+                }
+                updateMainColWidth();
+            break;
+        case "swColNavClose":
+            OPTIONS.Layout.swMainNav = false;
+            updateMainColWidth();
+            break;       
+        case "swColNavBig":
+            if (OPTIONS.Layout.swMainNav_Width <4){
+                OPTIONS.Layout.swMainNav_Width +=2
+                $("#swColNavBig").text("<");
+                }
+                else{
+                OPTIONS.Layout.swMainNav_Width = 2;
+                $("#swColNavBig").text(">");
+                }
+                updateMainColWidth();
+            break;   
+        case "swColOptClose":
+            OPTIONS.Layout.swMainOpt = false;
+            updateMainColWidth();    
+            break;   
+        case "swColOptBig":
+            if (OPTIONS.Layout.swMainOpt_Width <4){
+                OPTIONS.Layout.swMainOpt_Width +=2
+                $("#swColOptBig").text(">");
+                }
+                else{
+                OPTIONS.Layout.swMainOpt_Width = 2;
+                $("#swColOptBig").text("<");
+                }
+                updateMainColWidth();
+                break; 
+        case "btnNewText":
+            addEntryEditor_1([],[],[]);    
+            break;                 
+        default:
+            logDebug(idStr+"[btnNav]: id not found");
+            break
+    }
+});
+
+//////////////////////////////////////////////////////////////////
+$(".btnHideContent").click(function(){
+    $(this).parent().find('.swText_Feld').toggle();
+    if ($(this).parent().find('.swText_Feld').css('display')=='none')
+    {
+        $(this).parent().find('.btnHideContent').text('▼');
+    } else {
+        $(this).parent().find('.btnHideContent').text('▲');
+    }
+    logDebug("click")
+});
+
+$(".btnRemoveContent").click(function(){
+    $(this).parent().remove();
+    updateNavList();
+    logDebug("click")
+});
+
+
+$( "#swNavList" ).sortable({
+    start: function(e, ui) {
+        OPTIONS.tmpDragPosStart = ui.item.index();
+    },
+    update: function(event,ui ) {
+      OPTIONS.tmpDragPosEnd = ui.item.index();
+      swContentReplace();
+      
+    }
+});
+
+//////////////////////////////////////////////////////////////////
+//PRJECT LIST
+//////////////////////////////////////////////////////////////////
+$( "#swProjects" ).disableSelection();
+$( "#swProjects" ).sortable({
+    start: function(e, ui) {
+        logDebug(ui.item.index());
+    },
+    update: function(event,ui ) {
+        logDebug(ui.item.index())
+      
+    }
+});
+
+//////////////////////////////////////////////////////////////////
 //UPDATE NAVLIST WHEN H:EADING WAS LEFT
+//////////////////////////////////////////////////////////////////
 $(".swText_H1").focusout(function(){
     updateNavList();
 })
 
+$( "#swNavList" ).sortable({
+    start: function(e, ui) {
+        OPTIONS.tmpDragPosStart = ui.item.index();
+    },
+    update: function(event,ui ) {
+      OPTIONS.tmpDragPosEnd = ui.item.index();
+      swContentReplace();
+      
+    }
+});
+$( "#swNavList" ).disableSelection();
+
+function swContentReplace(){
+    ChEl = $("#swContent").find(".swContentBlock");
+    pos1 = OPTIONS.tmpDragPosStart+1;
+    pos2 = OPTIONS.tmpDragPosEnd+1;
+    
+    el1 = $(ChEl[pos1]).clone(true);
+    el2 = $(ChEl[pos2]).clone(true);
+    $(ChEl[pos1]).replaceWith(el2);
+    $(ChEl[pos2]).replaceWith(el1);
+    updateNavList();
+};
+
+// NAVLIST FUNCTIONS
+function swNavTOF_click(e){
+
+    //get position of element in DOM
+    child = e;
+    var i = 0;
+    while( (child = child.previousSibling) != null ) {i++;}
+    pos = i+1;
+    chEl = $("#swContent").find(".swText_H1");
+    var new_position = $(chEl[pos]).position().top - $(chEl[1]).position().top;
+    $('#swMainEditor').stop().animate({ scrollTop: new_position }, 500);
+}
+
+// UPDATE NAVLIST
 function updateNavList(){
     $("#swNavList").html("");
-    var firstLoop = 0;
+    var firstLoop = -1;
     $("#swContent").find(".swText_H1").each(function(){
         var $curEl = $(this);
         firstLoop += 1;
-        if (firstLoop >1){
-            var str = "<p>"+$curEl.text()+"</p>";
+        if (firstLoop >0){
+            var str = '<li id="swNavTOF_'+firstLoop+'" class="ui-state-default swNavTofRow" onclick="swNavTOF_click(this)">'+$curEl.text()+'</li>';
             $("#swNavList").html($("#swNavList").html() + str);
-            var str = "<p>"+$curEl.text()+"</p>";
         }
     })
     logDebug("updateNavList");
 }
 
-		$("#btnNewText").click(function(){
-			elX = $(this).parent().parent().find("#swContent_X").clone(true);
-			Nel = $("#swContent").find(".swText_Feld").length;
-			elX.attr("id", "swContent_"+Nel);
-			elX.appendTo("#swContent").show();
-			$("#swContent").find("#swContent_"+Nel).find(".swText_H1").text( Nel + ". Ueberschrift");
-			updateNavList();
-		});
-
-		$(".btnRemoveContent").click(function(){
-			$(this).parent().remove();
-            updateNavList();
-            logDebug("click")
-		});
-
-		$(".btnHideContent").click(function(){
-			$(this).parent().find('.swText_Feld').toggle();
-			if ($(this).parent().find('.swText_Feld').css('display')=='none')
-			{
-				$(this).parent().find('.btnHideContent').text('▼');
-			} else {
-				$(this).parent().find('.btnHideContent').text('▲');
-			}
-			logDebug("click")
-        });
-        
-        $(".btnMain").click(function(){
-            var idStr = $(this).attr("id");
-            switch(idStr){
-				case "btnMenuWindows":
-                    if ($("#swMainProject").css('display') == 'none'){
-                        $("#swMainProject").show();
-                        $("#swMainNav").show();
-                        OPTIONS.Layout.swMainProject = true;
-                        OPTIONS.Layout.swMainNav= true;
-                    }
-                    else{
-                        $("#swMainProject").hide();
-                        $("#swMainNav").hide();
-                        OPTIONS.Layout.swMainProject = false;
-                        OPTIONS.Layout.swMainNav= false;
-                    }
-                    updateMainColWidth();
-                    break
-                case "btnMenuOptions":
-                    if ($("#swMainOptions").css('display') == 'none'){
-                        $("#swMainOptions").show();
-                        OPTIONS.Layout.swMainOpt = true;
-                    }
-                    else{
-                        $("#swMainOptions").hide();
-                        OPTIONS.Layout.swMainOpt = false;
-                    }
-                    updateMainColWidth();
-                    break
-                case "btnMenuWords":
-                    if ($("#swMenuFont").css('display') == 'none'){
-                        $("#swMenuFont").show();
-                        OPTIONS.Layout.MenuFont.enabled = true;
-                    }
-                    else{
-                        $("#swMenuFont").hide();
-                        OPTIONS.Layout.MenuFont.enabled = false;
-                    }
-                    break;
-				default:
-					logDebug(idStr+": id not found");
-                    break
-            }
-        })
-
-        $(".btnNav").click(function(){
-            var idStr = $(this).attr("id");
-            switch(idStr){
-                case "swColProjClose":
-                    $("#swMainProject").hide();
-                    OPTIONS.Layout.swMainProject = false;
-                    updateMainColWidth();
-                    break;
-                case "swColProjBig":
-                    if (OPTIONS.Layout.swMainProject_Width <4){
-                        OPTIONS.Layout.swMainProject_Width +=2
-                        $("#swColProjBig").text("<");
-                        }
-                        else{
-                        OPTIONS.Layout.swMainProject_Width = 2;
-                        $("#swColProjBig").text(">");
-                        }
-                        updateMainColWidth();
-                    break;
-                case "swColNavClose":
-                    $("#swMainNav").hide();
-                    OPTIONS.Layout.swMainNav = false;
-                    updateMainColWidth();
-                    break;       
-                case "swColNavBig":
-                    if (OPTIONS.Layout.swMainNav_Width <4){
-                        OPTIONS.Layout.swMainNav_Width +=2
-                        $("#swColNavBig").text("<");
-                        }
-                        else{
-                        OPTIONS.Layout.swMainNav_Width = 2;
-                        $("#swColNavBig").text(">");
-                        }
-                        updateMainColWidth();
-                    break;   
-                case "swColOptClose":
-                    $("#swMainOptions").hide();
-                    OPTIONS.Layout.swMainOpt = false;
-                    updateMainColWidth();    
-                    break;   
-                case "swColOptBig":
-                    if (OPTIONS.Layout.swMainOpt_Width <4){
-                        OPTIONS.Layout.swMainOpt_Width +=2
-                        $("#swColOptBig").text(">");
-                        }
-                        else{
-                        OPTIONS.Layout.swMainOpt_Width = 2;
-                        $("#swColOptBig").text("<");
-                        }
-                        updateMainColWidth();
-                    break;                
-                default:
-					logDebug(idStr+": id not found");
-                    break
-            }
-        });
-	
-
+//////////////////////////////////////////////////////////////////
+// UPDATE MAIN WINDOW /////////////////////////////////
+//////////////////////////////////////////////////////////////////
 		function updateMainColWidth(){
-			if (OPTIONS.Layout.swMainOpt == false)
-				colOpt = 0;
-			else
-				colOpt = OPTIONS.Layout.swMainOpt_Width;
+           
 
-			if (OPTIONS.Layout.swMainProject == false)
-				colProj = 0;
-			else
-				colProj = OPTIONS.Layout.swMainProject_Width;
+			if (OPTIONS.Layout.swMainOpt == false){
+                colOpt = 0;
+                $("#swMainOptions").hide();
+            } else{
+                colOpt = OPTIONS.Layout.swMainOpt_Width;
+                $("#swMainOptions").show();
+            }
 
-			if (OPTIONS.Layout.swMainNav == false )
-				colNav = 0;
-			else
-				colNav = OPTIONS.Layout.swMainNav_Width;
+			if (OPTIONS.Layout.swMainProject == false){
+                colProj = 0;
+                $("#swMainProject").hide();
+            }else {
+                colProj = OPTIONS.Layout.swMainProject_Width;
+                $("#swMainProject").show();
+            }
+				
+			if (OPTIONS.Layout.swMainNav == false ){
+                colNav = 0;
+                $("#swMainNav").hide();
+            }else {
+                colNav = OPTIONS.Layout.swMainNav_Width;
+                $("#swMainNav").show();
+            }
 
+            if (OPTIONS.Layout.MenuFont.enabled == false ){
+                $("#swMenuFont").hide();
+            }else {
+                $("#swMenuFont").show();
+            }
+				
 			//now remove class and set new
 			$("#swMainProject").removeClass($("#swMainProject").attr('class'));
 			$("#swMainProject").addClass("col-sm-"+colProj);
