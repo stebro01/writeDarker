@@ -22,6 +22,7 @@ var OPTIONS = new Object()
         OPTIONS.Layout.CSS.btnNavBorderColor = "#353738";
         OPTIONS.Layout.CSS.swStatusFeldBG = "black";
         OPTIONS.Layout.CSS.swMain_H1_color= "white";
+        OPTIONS.Layout.CSS.mainFont = "Trebuchet MS"; 
 
         OPTIONS.Debug = new Object()
         OPTIONS.Debug.enabled = true;
@@ -34,6 +35,7 @@ var OPTIONS = new Object()
         OPTIONS.Store_LocalName = "wd_STORAGE";
         OPTIONS.tmpDragPosStart = [];
         OPTIONS.tmpDragPosEnd = [];
+        
         
         function logStatus(strText){
                 $("#swStatusFeld").text(strText);
@@ -416,4 +418,7 @@ function updateNavList(){
 
             $(".swMain_H1").css({"color":OPTIONS.Layout.CSS.swMain_H1_color});
             $(".swMain_H2").css({"color":OPTIONS.Layout.CSS.swMain_H1_color});
+
+            $("body").css({"font-family":OPTIONS.Layout.CSS.mainFont});
+
         }
