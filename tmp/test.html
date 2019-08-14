@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="allday.css" rel="stylesheet" type="text/css" />
+   <link href="day.css" id="styles" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<h1>Hi</h1>
+
+<script>
+$(document).ready(function(){
+    $('#mode').click(function(){
+        console.log('clik')
+        if($('link#styles').attr('href')=="day.css"){
+            $('#mode').attr('value','Switch To Day Mode')
+            $('link#styles').attr('href','night.css')
+        }
+        else
+        {
+            $('#mode').attr('value','Switch To Night Mode')
+            $('link#styles').attr('href','day.css')
+        }
+    })
+});
+</script>
+<div class="table-responsive container">
+<input type=button id="mode" text="Switch Mode" class="btn btn-primary" value="Switch To Night Mode" >  </div>
+  </html>
+
+
+
+</body>
