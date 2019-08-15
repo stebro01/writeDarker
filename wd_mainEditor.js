@@ -3,7 +3,9 @@ var OPTIONS = new Object()
 		OPTIONS.Layout.swMainProject_Width = 2;
 		OPTIONS.Layout.swMainNav_Width = 2;
         OPTIONS.Layout.swMainOpt_Width = 2;
-        OPTIONS.Layout.swMainEditor = true;
+        OPTIONS.Layout.swMainEditor_2_Width = 2;
+        OPTIONS.Layout.swMainEditor_1 = true;
+        OPTIONS.Layout.swMainEditor_2 = true;
         OPTIONS.Layout.swMainProject = true;
         OPTIONS.Layout.swMainNav = true;
         OPTIONS.Layout.swMainOpt = true;
@@ -244,9 +246,17 @@ $(".btnNav").click(function(){
                 }
                 updateMainColWidth();
                 break; 
-        case "btnNewText":
+        case "btnNewText_1":
             addEntryEditor_1([],[],[]);    
-            break;                 
+            break;   
+        case "btnNewText_2":
+            addEntryEditor_2([],[],[]);    
+            break;        
+        case "btnEditor2_close":
+            OPTIONS.Layout.swMainEditor_2 = false;
+            console.log("clik")
+            updateMainColWidth();    
+            break;                    
         default:
             logDebug(idStr+"[btnNav]: id not found");
             break
@@ -386,25 +396,35 @@ function updateNavList(){
                 $("#swMainNav").show();
             }
 
+            if (OPTIONS.Layout.swMainEditor_2 == false ){
+                colEditor_2 = 0;
+                $("#swMainContent_2").hide();
+            }else {
+                colEditor_2 = OPTIONS.Layout.swMainEditor_2_Width;
+                $("#swMainContent_2").show();
+            }
+
             if (OPTIONS.Layout.MenuFont.enabled == false ){
                 $("#swMenuFont").hide();
             }else {
                 $("#swMenuFont").show();
             }
-				
+	
 			//now remove class and set new
 			$("#swMainProject").removeClass($("#swMainProject").attr('class'));
-			$("#swMainProject").addClass("col-sm-"+colProj);
+			$("#swMainProject").addClass("colSW col-sm-"+colProj);
 
 			$("#swMainNav").removeClass($("#swMainNav").attr('class'));
-			$("#swMainNav").addClass("col-sm-"+colNav);
+			$("#swMainNav").addClass("colSW col-sm-"+colNav);
 
 			$("#swMainOptions").removeClass($("#swMainOptions").attr('class'));
-			$("#swMainOptions").addClass("col-sm-"+colOpt);
+			$("#swMainOptions").addClass("colSW col-sm-"+colOpt);
 
-			var colW = 12-(colOpt+colNav+colProj);
-			$("#swMainEditor").removeClass($("#swMainEditor").attr('class'));
-			$("#swMainEditor").addClass("scrollableCol col-sm-"+colW);
+			var colW = 12-(colOpt+colNav+colProj+colEditor_2);
+			$("#swMainContent_1").removeClass($("#swMainContent_1").attr('class'));
+            $("#swMainContent_1").addClass("colSW scrollableCol col-sm-"+colW);
+            $("#swMainContent_2").removeClass($("#swMainContent_2").attr('class'));
+			$("#swMainContent_2").addClass("colSW scrollableCol col-sm-"+colEditor_2);
         }
         
         function updateCSS(){

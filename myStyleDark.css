@@ -1,0 +1,62 @@
+/* MAIN SETTINGS
+------------------------*/
+.font_color_1{
+    color:lightslategray;
+}
+
+.font_color_2{
+    color: lightgray;
+}
+
+.bg_color_1{
+    background-color: #222427;
+}
+
+body{
+
+}
+
+.btn-dark{
+    background: transparent;
+    border:none;
+}
+
+
+/* NAVBAR
+------------------------*/
+
+
+
+/*Status FELD
+------------------------*/
+#swStatusFeld{
+    background-color: black;
+    color: lightgray;
+    
+}
+
+
+/* MAIN CONTENT FIELD 
+------------------------*/
+.colSW{
+    border-right: 0.8px solid #333A40;
+}
+
+/* CONTENT FIELD 1 */
+.scrollableCol{
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+}
+
+
+.btnNav:hover, .btnHideContent:hover, .btnRemoveContent:hover{
+    background-color: #333A40;
+    color:white;
+}
+
+
+
+
+
+/*BOTTOM NAV BAR 
+------------------------*/

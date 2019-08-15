@@ -1,0 +1,71 @@
+/* MAIN SETTINGS
+------------------------*/
+.font_color_1{
+    color:#2E4D58;
+}
+
+.font_color_2{
+    color: #1D292C;
+}
+
+.bg_color_1{
+    background-color:#EEE5DB;
+}
+
+body{
+
+}
+
+img.thumbnail {
+    -webkit-filter:invert(100%);
+     filter:progid:DXImageTransform.Microsoft.BasicImage(invert='1');
+}
+
+.btn-light{
+    background: transparent;
+    border:none;
+}
+
+.navbar{
+    background-color:#D3C3C3 !important;
+   
+}
+
+/* NAVBAR
+------------------------*/
+
+
+
+/*Status FELD
+------------------------*/
+#swStatusFeld{
+    background-color:#9E9AA2;
+    color: #1D292C;
+    
+}
+
+
+/* MAIN CONTENT FIELD 
+------------------------*/
+.colSW{
+    border-right: 0.8px solid #EEE5DB;
+}
+
+/* CONTENT FIELD 1 */
+.scrollableCol{
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+}
+
+
+.btnNav:hover, .btnHideContent:hover, .btnRemoveContent:hover{
+    background-color: #34363a;
+    color:white;
+}
+
+
+
+
+
+/*BOTTOM NAV BAR 
+------------------------*/

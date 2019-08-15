@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<!-- Required meta tags -->
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  	<!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="css/bootstrap.min.css">
+	  <link rel="stylesheet" href="res/contextMenu/jquery.contextMenu.min.css">
+
+  	<!-- MAIN CSS -->
+	  <link rel="stylesheet" href="myStyleMain.css">
+	  <link id="dayandnight" rel="stylesheet" href="myStyleDark.css">
+  	<title>Scientific Writer</title>
+  </head>
+
+    <body class="font_color_1 bg_color_1">
+		<div class="bg_image">
+			<img src="img/background1.jpg" alt="">
+		</div>
+
+    	<!-- NAVBAR -->
+    	<nav class="navbar navbar-expand navbar-dark bg-dark noZen">
+    		<a class="navbar-brand" href="#">writeDarker</a>
+
+    		<div class="collapse navbar-collapse" id="navbarText">
+    			<ul class="navbar-nav mr-auto">
+    				<li class="nav-item active"></li>
+    				<div class="btn-group float-left">
+    					<button id="btnMenuWindows" type="button" class="btn btn-dark btnMain"><img src="img/logo_window.png" class="thumbnail"></button>
+    				</div>
+    				</li>
+    			</ul>
+
+				<div class="navbar_font_1"> Features die noch kommen: Projekte, Pomodoro, WortCount/limit/goal, Datenbankanbindung, Literatur</div>
+
+    			<button id="btnMenuWords" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoFont.png" class="thumbnail"></button>
+    			<button id="btnMenuOptions" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoOpt.png" class="thumbnail"></button>
+    		</div>
+    	</nav>
+    	<!-- /NAVBAR -->
+
+	<!-- MAIN MENU -->
+	<div class="container-fluid" id="swMenuFont">
+	
+	</div>
+	<!-- /MAIN MENU -->
+
+	<!-- STATUSBAR -->
+	<div class="container noZen" id="swStatusFeld">
+		Das ist das Statusfeld [#swStatusFeld]
+	</div>
+	<!-- /STATUSBAR -->
+
+	
+	<!-- MAINWINDOW -->
+	<div class="container-fluid">
+		<div id="swMainRow" class="row">
+			<!-- PROJECT VIEW -->
+			<div id="swMainProject" class="col-sm-2 colSW">
+				<!-- STATUS LEISTE & OPTIONS -->
+				<div class="content_TOP_H1 font_color_2">Projekt
+					<div class="btn-group float-right">
+						<button id="swColProjClose" class="btnNav font_color_2">X</button>
+						<button id="swColProjBig" class="btnNav font_color_2">></button>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- NAVIGATOR VIEW -->
+			<div id="swMainNav" class="col-sm-2 colSW">
+				<!-- STATUS LEISTE & OPTIONS -->
+				<div class="content_TOP_H1 font_color_2">Navigation
+					<div class="btn-group float-right">
+						<button id="swColNavClose" class="btnNav font_color_2">X</button>
+						<button id="swColNavBig" class="btnNav font_color_2">></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- EDITOR VIEW 1 -->
+			<div id="swMainContent_1" class="col-sm-3 scrollableCol colSW">
+				<div class="content_TOP_H1 font_color_2">Editor 1
+					<div class="btn-group float-right">
+						<button id="btnNewText_1" class="btnNav font_color_2">NEU</button>
+					</div>
+				</div> 
+			</div>
+
+			<!-- EDITOR VIEW 2-->
+			<div id="swMainContent_2" class="col-sm-3 scrollableCol colSW">
+				<div class="content_TOP_H1 font_color_2">Editor 2
+					<div class="btn-group float-right">
+						<button id="btnNewText_2" class="btnNav font_color_2">NEU</button>
+						<button id="btnEditor2_close" class="btnNav font_color_2">X</button>
+					</div>
+				</div>
+			</div>
+
+			
+
+			<!-- NAVIGATOR VIEW -->
+			<div id="swMainOptions" class="col-sm-2 colSW">
+				<div class="content_TOP_H1 font_color_2" style="text-align:center">
+					<button id="swColOptBig" class="btnNav font_color_2 float-left"><</button>
+					Optionen
+					<button id="swColOptClose" class="btnNav font_color_2 float-right">X</button>
+				</div>
+				<div class="container">
+					Folgende Optionen gibt es schon
+				</div>
+				<div class="container" style="text-align: center; margin-top:20px">
+					<button id="switch_day" type="button" class="btn btn-sm btn-secondary" >LightMode</button>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- /MAINWINDOW -->
+
+
+<footer >
+		<nav id = "swBottomNav" class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom noZen">
+				<!-- Navbar content -->
+				<div>Informationen: </div>
+				<div id="swBottomNavTxt" style="margin-left: 20px"></div>
+			</nav>
+</footer>
+
+	<!-- QUESTION MODALS -->
+	
+	<!-- SAVE LOKAL MODAL -->
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js" ></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="res/contextMenu/jquery.contextMenu.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	
+
+	
+    <!-- Optional JavaScript -->
+	<script src="wd_mainEditor.js"></script>
+	 <!-- 
+	<script src="wd_menuFont.js"></script>
+	<script src="wd_projectManager.js"></script>-->
+		
+	<script>
+		$( document ).ready(function() {
+			/*
+
+			logStatus("fertig, alles wurde vorbereitet");
+			logDebug("debuging Mode on");
+			loadLocal();
+			//updateNavList();
+			*/
+
+
+
+			/*little script to switch beetwenn day and night*/
+			$('#switch_day').click(function(){
+				if($('link#dayandnight').attr('href')=="myStyleDark.css"){
+					$('#switch_day').text('DarkMode')
+					$('link#dayandnight').attr('href','myStyleDay.css')
+					$("button.btn-dark").removeClass("btn-dark").addClass("btn-light");
+					$("nav.navbar-dark").removeClass("navbar-dark bg-dark").addClass("navbar-light bg-transparent");
+				}
+				else
+				{
+					$('#switch_day').text('LightMode');
+					$('link#dayandnight').attr('href','myStyleDark.css');
+					$("button.btn-light").removeClass("btn-light").addClass("btn-dark")
+					$("nav.navbar-light").removeClass("navbar-light bg-light bg-transparent").addClass("navbar-dark bg-dark");
+					}
+				})
+			});
+		
+	
+	</script>
+
+  </body>
+</html>
