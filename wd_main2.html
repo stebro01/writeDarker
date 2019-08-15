@@ -15,35 +15,73 @@
   	<title>Scientific Writer</title>
   </head>
 
-    <body class="font_color_1 bg_color_1">
-		<div class="bg_image">
-			<img src="img/background1.jpg" alt="">
+<body class="font_color_1 bg_color_1">
+	<div class="bg_image">
+		<img src="img/background1.jpg" alt="">
+	</div>
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand navbar-dark bg-dark noZen">
+		<a class="navbar-brand" href="#">writeDarker</a>
+
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"></li>
+				<div class="btn-group float-left">
+					<button id="btnMenuWindows" type="button" class="btn btn-dark btnMain"><img src="img/logo_window.png" class="thumbnail"></button>
+				</div>
+				</li>
+			</ul>
+
+			<div class="navbar_font_1"> Features die noch kommen: Projekte, Pomodoro, WortCount/limit/goal, Datenbankanbindung, Literatur</div>
+
+			<button id="btnMenuWords" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoFont.png" class="thumbnail"></button>
+			<button id="btnMenuOptions" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoOpt.png" class="thumbnail"></button>
 		</div>
-
-    	<!-- NAVBAR -->
-    	<nav class="navbar navbar-expand navbar-dark bg-dark noZen">
-    		<a class="navbar-brand" href="#">writeDarker</a>
-
-    		<div class="collapse navbar-collapse" id="navbarText">
-    			<ul class="navbar-nav mr-auto">
-    				<li class="nav-item active"></li>
-    				<div class="btn-group float-left">
-    					<button id="btnMenuWindows" type="button" class="btn btn-dark btnMain"><img src="img/logo_window.png" class="thumbnail"></button>
-    				</div>
-    				</li>
-    			</ul>
-
-				<div class="navbar_font_1"> Features die noch kommen: Projekte, Pomodoro, WortCount/limit/goal, Datenbankanbindung, Literatur</div>
-
-    			<button id="btnMenuWords" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoFont.png" class="thumbnail"></button>
-    			<button id="btnMenuOptions" type="button" class="btn btn-dark float-right btnMain"><img src="img/logoOpt.png" class="thumbnail"></button>
-    		</div>
-    	</nav>
-    	<!-- /NAVBAR -->
+	</nav>
+	<!-- /NAVBAR -->
 
 	<!-- MAIN MENU -->
 	<div class="container-fluid" id="swMenuFont">
-	
+		<span id="swMenuFont_toggle" class="noZen">
+			<span id="formatItems">
+				<button id="btnF" type="button" class="btn btn-dark btnMenuFont" title="Fett"><b>F</b></button>
+				<button id="btnI" type="button" class="btn btn-dark btnMenuFont" title="Kursiv"><i>K</i></button>
+				<button id="btnSub" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
+					title="Tiefgestellt">X<sub>S</sub></button>
+				<button id="btnSup" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
+					title="Hochgestellt">X<sup>S</sup></button>
+				<button id="btnClean" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip"
+					data-placement="top" title="Formatierung löschen">[]</button>
+
+				<div class="btn-group" role="group">
+					<button id="btnFontBig" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip"
+						data-placement="top" title="Schrift vergrößern">+</button>
+					<button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle btnMenuFont" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						Schrift
+					</button>
+					<div class="dropdown-menu btnMenuFont" aria-labelledby="btnGroupDrop1">
+						<a class="dropdown-item" href="#"
+							onclick="$('#swContent').css({'font-size':'16px','font-family':'Trebuchet MS'});">Standard</a><br>
+						<a class="dropdown-item" href="#"
+							onclick="$('#swContent').css({'font-size':'16px','font-family':'Courier New'});">Courier</a>
+					</div>
+					<button id="btnFontSmall" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip"
+						data-placement="top" title="Schrift verkleinern">-</button>
+				</div>
+			</span>
+			<button id="btnCode" type="button" class="btn btn-dark btnMenuFont" data-toggle="tooltip" data-placement="top"
+				title="Schalte zwischen HTML und normaler Sicht">Code</button>
+			<button id="btnSound" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
+				data-placement="top" title="Tippgeräusch einschalten"><img src="img/logoSound.png" class="thumbnail"></button>
+			<button id="btnKIMode" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
+				data-placement="top" title="KI einschalten">KI</button>
+			<button id="btnZen" type="button" class="btn btn-dark btnMenuFont" style="opacity: 0.5" data-toggle="tooltip"
+				data-placement="top" title="ZEN Modus einschalten"><img src="img/logoZen.png" class="thumbnail"></button>
+		</span>
+		<button id="btnMenuFont_toggle" type="button" class="btn btn-light btnMenuFont" data-toggle="tooltip"
+			data-placement="top" title="Menü ein- und ausklappen">+</button>
 	</div>
 	<!-- /MAIN MENU -->
 
@@ -147,8 +185,8 @@
     <!-- Optional JavaScript -->
 	<script src="wd_mainEditor.js"></script>
 	 <!-- 
-	<script src="wd_menuFont.js"></script>
-	<script src="wd_projectManager.js"></script>-->
+	<script src="wd_menuFont.js"></script>-->
+	<script src="wd_projectManager.js"></script>
 		
 	<script>
 		$( document ).ready(function() {

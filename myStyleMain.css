@@ -31,6 +31,14 @@ img.thumbnail{
     height: 20px;
 }
 
+.btnMenuFont{
+    font-size: 0.8em;
+}
+
+#swMenuFont{
+    display:none;
+}
+
 
 /*Status FELD
 ------------------------*/

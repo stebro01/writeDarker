@@ -54,6 +54,9 @@ DATA > Object das alle Projekte enthaelt:
 
         12) loadProjectLocal() > lade das Projekt aus window.localStorage.wd_PROJECT    
 
+        13) returnProjectNames() > gibt ein Array mit allen Project namen Zurueck
+            > Position 0 ist "trash"
+
 //  INPROGRESS: Folgende Funktionen sind in Arbeit:
 
 
@@ -267,6 +270,21 @@ function loadProjectLocal(){
     }  
 }
 
+////// 13) returnProjectNames ////////////////
+function returnProjectNames(){
+    var ProjectNames = new Array();
+    ProjectNames.push("trash");
+    var KEY = Object.keys(DATA);
+
+    for (i=0; i<KEY.length; i++){
+        if (typeof(DATA[KEY[i]])=="object"){
+            title = DATA[KEY[i]].title;
+            if (title !== "trash" )
+                ProjectNames.push(title);
+        }
+    }
+    return ProjectNames;
+}
 
 $(".swProjectRow").click(function(){
     logDebug("Click:swProjects"+$(this).attr("id"))
