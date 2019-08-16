@@ -46,12 +46,40 @@ body{
     border-right: 0.8px solid #333A40;
 }
 
+/* PROJEKT COL */
+#swMainProject{
+    max-height: calc(100vh - 150px);
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(52,58,64,0.5), rgba(34,36,39,0));
+}
+
+.swProjectRow:hover{
+    color: white;
+    background-color:  #222427;
+ }
+
+ /* NAV COL */
+ .swNavTofRow{
+    color: lightslategray;
+
+ }
+ .swNavTofRow:hover{
+    color: lightgray;
+    background-color:  #333A40;
+  }
+
 /* CONTENT FIELD 1 */
 .scrollableCol{
     height: calc(100vh - 150px);
     overflow-y: scroll;
 }
 
+.swText_Feld:focus, .swText_H1:focus {
+    color:lightgray;
+  }
+
+  /*BUTTONS
+------------------------*/
 
 .btnNav:hover, .btnHideContent:hover, .btnRemoveContent:hover{
     background-color: #333A40;

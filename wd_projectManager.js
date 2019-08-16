@@ -1,8 +1,18 @@
-
+/* PERFORM THE STARTUP */
 var DATA;
+var ACTIVE_PROJECT = new Object();
 
 if (loadProjectLocal() == false)
     initProjectManager()
+
+    PN = returnProjectNames();
+    ACTIVE_PROJECT = findProjectByID(PN[0].id);
+
+loadGUI_Projects();    
+loadGUI_Navigation();
+
+/* ENDOF STARTUP */
+
 
 /* PROJECTMANAGER
 DATA > Object das alle Projekte enthaelt:
@@ -12,6 +22,14 @@ DATA > Object das alle Projekte enthaelt:
 //////////////////////// 
 //  Folgende Funktionen sind derzeit fertig:
         SAVESTR: TRUE or FALSE >> speichere Arbeitsschritt LOKAL >> call saveProjectLocal()
+
+
+
+//////  KOMMUNIKATION WITH THE HTML CODE ///////////////
+////    A) loadGUI_Projects() -> LOAD THE PROJECT NAMES TO THE PROJECT VIE
+
+
+//////  INTERNAL PROJECTMANAGERROUTINES ///////////////
 
         1) initProjectManager() > initialisiert DATA als new Object und setzt
             - TRASH
@@ -72,6 +90,36 @@ DATA > Object das alle Projekte enthaelt:
 
 */
 
+////// KOMMUNIKATION WITH THE HTML CODE ///////////////
+//// A) loadGUI_Projects() -> LOAD THE PROJECT NAMES TO THE PROJECT VIEW
+function loadGUI_Projects(){
+    PN = returnProjectNames();
+    var contentStr="";
+    for (i=0;i<PN.length; i++){
+        contentStr += '<li id="'+PN[i].id+'" class="swProjectRow" onclick="swNavSelectProject(this)">'+PN[i].title+'</li>';
+    }
+    $("")
+    $("#swProjects").html(contentStr);
+
+    
+
+}
+
+function findProjectByID(_creationID){
+    // usage: findProjectByID("1565958138067_11")
+    var KEY = Object.keys(DATA);
+        
+    for (i=0; i<KEY.length; i++){
+        if (typeof(DATA[KEY[i]])=="object"){
+            if (DATA[KEY[i]]._creationID == _creationID){
+                return DATA[KEY[i]];
+            }
+        }
+    }
+    return false;
+}
+
+
 ////// 1) INITPROJECTMANAGER ////////////////
 function initProjectManager(){
     DATA = new Object();
@@ -105,7 +153,7 @@ function addProjectWithContent(ProjectStr, h1Str, txtStr, IdStr, SAVESTR){
     if (typeof(DATA[ProjectStr]) == "undefined"){
         DATA[ProjectStr] = new Object();
         DATA[ProjectStr].title = ProjectStr;
-        DATA[ProjectStr]._creationID = Date.now();
+        DATA[ProjectStr]._creationID = Date.now() + "_" + Object.keys(DATA).length;
         DATA[ProjectStr]._creationIDStr = Date();
         DATA[ProjectStr]._lastChanged = Date.now();
         DATA[ProjectStr]._lastSync = false;
@@ -273,30 +321,18 @@ function loadProjectLocal(){
 ////// 13) returnProjectNames ////////////////
 function returnProjectNames(){
     var ProjectNames = new Array();
-    ProjectNames.push("trash");
     var KEY = Object.keys(DATA);
-
+        
     for (i=0; i<KEY.length; i++){
         if (typeof(DATA[KEY[i]])=="object"){
-            title = DATA[KEY[i]].title;
-            if (title !== "trash" )
-                ProjectNames.push(title);
+            tmp ={"title": DATA[KEY[i]].title, "id":DATA[KEY[i]]._creationID}
+            if (tmp.title !== "trash" ){
+                ProjectNames.push(tmp);
+            }
         }
     }
     return ProjectNames;
 }
-
-$(".swProjectRow").click(function(){
-    logDebug("Click:swProjects"+$(this).attr("id"))
-})
-
-$(".swProjectRow").on("dblclick", function(){
-    logDebug("dbl:swProjects"+$(this).attr("id"))
-})
-
-$("#swProjNew").click(function(){
-    logDebug("btn:"+$(this).attr("id"))
-})
 
 
 ////////////////// NEEDFUL THINGS
@@ -323,6 +359,10 @@ function addContentStrToProject(ProjectStr, h1Str, txtStr, IdStr){
     content = new Object();
     content.H1 = h1Str;
     content.TXT = txtStr;
+    console.log(IdStr)
+    if (IdStr == "" | IdStr == "undefined" | typeof(IdStr) == "undefined"){
+        IdStr = Date.now() + "_" + DATA[ProjectStr].content.length;
+    }
     content.strID = IdStr;
     content._creationID = Date.now();
     content._lastSync = false;

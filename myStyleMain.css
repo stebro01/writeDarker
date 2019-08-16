@@ -4,6 +4,10 @@
     display: block;
 }
 
+.TEMPLATE{
+    display: block;
+}
+
 body{
     font-size: 1em;
     font-family: "Avenir";
@@ -22,7 +26,6 @@ body{
     overflow-x: hidden;
     z-index:  -1;;
 }
-
 
 /* NAVBAR
 ------------------------*/
@@ -64,6 +67,43 @@ img.thumbnail{
     margin-right:0px;
 }
 
+/* PROJECT FIELD */
+.swProjectList{
+    margin-top: 10px;
+    font-size: 1em;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+    list-style-type: none; 
+    margin: 0; padding: 0; 
+    width: 100%;
+}
+
+.swProjectRow{
+    margin-top: 10px;
+    user-select: none;
+    z-index: 1000;
+ }
+ 
+/* NAVIGATION ROW */
+#swNavList{
+    margin-top: 10px;
+    font-size: 0.8em;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+    list-style-type: none; 
+    margin: 0; padding: 0; 
+    width: 100%;
+}
+
+.swNavTofRow{
+    margin-top: 10px;
+    user-select: none;
+    z-index: 1000;
+ }
+ 
+
 /* CONTENT FIELD 1 */
 .content_TOP_H1{
     font-size:0.8em;
@@ -82,7 +122,27 @@ img.thumbnail{
     user-select: none;
 }
 
-.btnNav{
+
+.swText_Feld{
+    margin-top: 10;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    
+}
+
+.swText_H1{
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+.swText_Feld:focus, .swText_H1:focus {
+    outline: none;
+  }
+
+/*BUTTONS 
+------------------------*/
+
+.btnNav, .btnHideContent, .btnRemoveContent{
    
     border: 0.8px solid #353738;
     background:transparent;
