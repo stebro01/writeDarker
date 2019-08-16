@@ -44,10 +44,10 @@ function loadGUI_Navigation(){
     loadGUI_Editor()
 }
 
-function loadGUI_Editor(){
+function loadGUI_Editor(num){
     //welcher ist aktiv?
-    activeEditor = getActiveEditor().find(".swContent");
-
+    activeEditor = getActiveEditor(num).find(".swContent");
+   
     $(activeEditor).html("");
 
     for (i=0;i<ACTIVE_PROJECT.content.length;i++){
@@ -61,8 +61,45 @@ function loadGUI_Editor(){
         $(activeEditor).append(elTemp);
     }
 
-    getActiveEditor().find(".swMainEditorTitle").text(ACTIVE_PROJECT.title)
+    //update the title
+    getActiveEditor(num).find(".swMainEditorTitle").text(ACTIVE_PROJECT.title)
+    getActiveEditor(num).find(".swMainEditorTitle").attr({"value":ACTIVE_PROJECT._creationID});
+
+    if (getActiveEditor().attr("id")=="swMainContent_1"){
+        OPTIONS.Layout.swMainEditor_1_Project = ACTIVE_PROJECT._creationID;
+    }else{
+        OPTIONS.Layout.swMainEditor_2_Project = ACTIVE_PROJECT._creationID;
+    }
 }
+
+//////////////////////////////////////////////////////////////////
+//CHANGE CONTENT > STORE TO DATA
+//////////////////////////////////////////////////////////////////
+
+$('[contenteditable=true]').on('input', (e) => {
+    // your code here
+    var ID = "";
+    var TXT = "";
+    var H1 = "";
+    if ($(e.target).hasClass("swText_H1")){
+        $el = $(e.target).parent().parent();
+        ID = $el.attr("id").split("@");
+        H1 = $(e.target).html();
+    } 
+
+    if ($(e.target).hasClass("swText_Feld")){
+        $el = $(e.target).parent();
+        ID = $el.attr("id").split("@");
+        TXT = $(e.target).html();
+    }
+
+    if (ID == ""){
+        logDebug("ID not found!");
+        return false;
+    }
+
+    updateProjectEntryByID(ID[0], ID[1], H1, TXT);
+});
 
 //////////////////////////////////////////////////////////////////
 //3. UPDATE NAVLIST WHEN H:EADING WAS LEFT
@@ -107,8 +144,7 @@ function swNavTOF_click(e){
     pos = i;
     logDebug("swNavTOF_click:"+pos)
 
-    activeContent = getActiveEditor().find(".swContent");
-    activeContent = $("#swContent_1").find(".swText_H1");
+    activeContent = getActiveEditor().find(".swText_H1");
     var new_position = $(activeContent[pos]).position().top - $(activeContent[0]).position().top;
     activeEditor = getActiveEditor().find(".swEditor");
     activeEditor.stop().animate({ scrollTop: new_position }, 500);
@@ -171,8 +207,8 @@ $(".swProjectRow").on("dblclick", function(){
 
 
 ///// btnNAV >>> das sind fast alle Buttons
-$(".btnNav").click(function(){
-    var idStr = $(this).attr("id");
+function btnNAVRUN(e){
+    var idStr = $(e).attr("id");
     switch(idStr){
         case "swColProjClose":
             OPTIONS.Layout.swMainProject = false;
@@ -235,7 +271,7 @@ $(".btnNav").click(function(){
             logDebug(idStr+"[btnNav]: id not found");
             break
     }
-});
+};
 
 
 
@@ -243,6 +279,7 @@ $(".btnNav").click(function(){
 // UPDATE MAIN WINDOW /////////////////////////////////
 //////////////////////////////////////////////////////////////////
 function updateMainColWidth(){
+    
     if (OPTIONS.Layout.swMainOpt == false){
         colOpt = 0;
         $("#swMainOptions").hide();
@@ -301,9 +338,7 @@ function updateMainColWidth(){
     if ($("#swMainContent_2").attr("value") == "off" | OPTIONS.Layout.swMainEditor_2 == false){
         setActiveEditor(1);
     };
-
 }
-
 
 // addEntryEditor_1(idStr, h1Str, txtStr ) -> ADD AN ENTRY (i.e. addEntryEditor_1([],[],[]))
 // 2) emptyEditor_1() -> REMOVE ALL ENTRIES
@@ -313,11 +348,20 @@ function addEntryEditor_1(idStr, h1Str, txtStr ){
         h1Str = Nel + ". Ueberschrift";
     }
 
-console.log('kommt noch!')
+    if (OPTIONS.Layout.swMainEditor_1_Project == ""){
+        console.log("OPTIONS.Layout.swMainEditor_1_Project: undefined");
+        return false;
+    }
+    console.log(OPTIONS.Layout.swMainEditor_1_Project)
 
+    ID = OPTIONS.Layout.swMainEditor_1_Project;
+    H1 = OPTIONS.NEWPROJECT_H1;
+    TXT = OPTIONS.NEWPROJECT_TXT;
+    addContentToProjectByID(ID, H1, TXT,[]);
+
+    loadGUI_Editor(1)
+    loadGUI_Navigation();
 }
-
-
 
 function setActiveEditor(num){
     $(".swEditor").removeClass("bg_color_highlight").parent().attr({"value":"off"});;
@@ -334,13 +378,20 @@ function setActiveEditor(num){
     $el.attr({"value":"on"}).find(".swEditor").addClass("bg_color_highlight");
 }
 
-function getActiveEditor(){
-    if (OPTIONS.Layout.swMainEditor_ACTIVE  == 1){
-        activeEditor = $("#swMainContent_1");
+function getActiveEditor(num){
+
+    if (typeof(num) == "undefined"){
+        if (OPTIONS.Layout.swMainEditor_ACTIVE  == 1){
+            activeEditor = $("#swMainContent_1");
+        }
+        else {
+            activeEditor = $("#swMainContent_2");
+        }
+    } else {
+        activeEditor = $("#swMainContent_"+num);
     }
-    else {
-        activeEditor = $("#swMainContent_2");
-    }
+
+    
     return activeEditor
 }
 

@@ -6,6 +6,8 @@ var OPTIONS = new Object()
     OPTIONS.Layout.swMainEditor_2_Width = 2;
     OPTIONS.Layout.swMainEditor_1 = true;
     OPTIONS.Layout.swMainEditor_2 = true;
+    OPTIONS.Layout.swMainEditor_1_Project = "";
+    OPTIONS.Layout.swMainEditor_2_Project = "";
     OPTIONS.Layout.swMainEditor_ACTIVE = 1;
     OPTIONS.Layout.swMainProject = true;
     OPTIONS.Layout.swMainNav = true;
@@ -25,7 +27,10 @@ var OPTIONS = new Object()
     OPTIONS.Layout.CSS.btnNavBorderColor = "#353738";
     OPTIONS.Layout.CSS.swStatusFeldBG = "black";
     OPTIONS.Layout.CSS.swMain_H1_color= "white";
-    OPTIONS.Layout.CSS.mainFont = "Trebuchet MS"; 
+    OPTIONS.Layout.CSS.mainFont = "Trebuchet MS";
+    
+    OPTIONS.NEWPROJECT_H1 = "LEER"
+    OPTIONS.NEWPROJECT_TXT = "..."
 
     OPTIONS.Debug = new Object()
     OPTIONS.Debug.enabled = true;

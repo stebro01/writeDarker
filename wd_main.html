@@ -101,8 +101,8 @@
 				<div class="d-flex justify-content-between content_TOP_H1 font_color_2">
 					<div class="p-0">Projekt</div>
 					<div class="p-0 btn-group">
-						<button id="swColProjClose" class="btnNav font_color_2">X</button>
-						<button id="swColProjBig" class="btnNav font_color_2">></button>
+						<button id="swColProjClose" class="btnNav font_color_2" onclick="btnNAVRUN(this)">X</button>
+						<button id="swColProjBig" class="btnNav font_color_2" onclick="btnNAVRUN(this)">></button>
 					</div>
 				</div>
 				<!-- SYSTEM: ALL & TRASH-->
@@ -148,8 +148,8 @@
 				<div class="d-flex justify-content-between content_TOP_H1 font_color_2">
 					<div class="p-0" id="swNavName">Navigation</div>
 					<div class="p-0 btn-group float-right">
-						<button id="swColNavClose" class="btnNav font_color_2">X</button>
-						<button id="swColNavBig" class="btnNav font_color_2">></button>
+						<button id="swColNavClose" class="btnNav font_color_2" onclick="btnNAVRUN(this)">X</button>
+						<button id="swColNavBig" class="btnNav font_color_2" onclick="btnNAVRUN(this)">></button>
 					</div>
 				</div>
 
@@ -167,7 +167,7 @@
 					<div class="d-flex justify-content-between content_TOP_H1 font_color_2">
 						<div class="p-0 swMainEditorTitle">Editor 1</div>	
 						<div class="p-0 btn-group float-right">
-							<button id="btnNewText_1" class="btnNav font_color_2">NEU</button>
+							<button id="btnNewText_1" class="btnNav font_color_2" onclick="btnNAVRUN(this)">NEU</button>
 						</div>
 					</div> 
 					
@@ -200,8 +200,8 @@
 					<div class="d-flex justify-content-between content_TOP_H1 font_color_2">
 						<div class="p-0 swMainEditorTitle">Editor 2</div>	
 						<div class="p-0 btn-group float-right">
-							<button id="btnNewText_2" class="btnNav font_color_2">NEU</button>
-							<button id="btnEditor2_close" class="btnNav font_color_2">X</button>
+							<button id="btnNewText_2" class="btnNav font_color_2" onclick="btnNAVRUN(this)">NEU</button>
+							<button id="btnEditor2_close" class="btnNav font_color_2" onclick="btnNAVRUN(this)">X</button>
 						</div>
 					</div>
 					<!-- CONTENT -->
@@ -216,9 +216,9 @@
 			<!-- OPTIONS VIEW -->
 			<div id="swMainOptions" class="col-sm-2 colSW">
 				<div class="d-flex justify-content-between content_TOP_H1 font_color_2">
-					<button id="swColOptBig" class="p-0 btnNav font_color_2 float-left"><</button>
+					<button id="swColOptBig" class="p-0 btnNav font_color_2 float-left" onclick="btnNAVRUN(this)"><</button>
 					<div class="p-0">Optionen</div>
-					<button id="swColOptClose" class="p-0 btnNav font_color_2 float-right">X</button>
+					<button id="swColOptClose" class="p-0 btnNav font_color_2 float-right" onclick="btnNAVRUN(this)">X</button>
 				</div>
 				<div class="container">
 					Folgende Optionen gibt es schon
@@ -292,7 +292,6 @@
 				})
 			});
 
-		
 			//some debuggin options
 			$("#btnDebugLoadProject").click(function(){
 				console.log('click:btnDebugLoadProject')

@@ -48,6 +48,8 @@ DATA > Object das alle Projekte enthaelt:
             - einzelne Werte: addContentToProject("trash", "h1", "txt1", "id1")
             - oder mehrere: addContentToProject("trash", ["h1", "h2"], ["txt1", "txt2"], [])
         
+        4.1 addContentToProjectByID(IDstr,  h1Str, txtStr, IdStr, SAVESTR)
+
         5) removeContentFromProject(ProjectStr, entryID, SAVESTR) > entfernt entryID vom Projekt
             - i.e.: removeContentFromProject("Demo 2", 2, SAVESTR)
 
@@ -100,9 +102,6 @@ function loadGUI_Projects(){
     }
     $("")
     $("#swProjects").html(contentStr);
-
-    
-
 }
 
 function findProjectByID(_creationID){
@@ -117,6 +116,27 @@ function findProjectByID(_creationID){
         }
     }
     return false;
+}
+
+function findEntryByID(projID, entryID){
+    PROJ = findProjectByID(projID);
+    for (i=0;i<PROJ.content.length; i++){
+        if (PROJ.content[i].strID == entryID){
+            return PROJ.content[i];
+        }
+    }
+    return false
+}
+
+function updateProjectEntryByID(projID, entryID, H1, TXT){
+    PROJ = findEntryByID(projID, entryID);
+    if (TXT !== ""){
+        PROJ.TXT = TXT;
+    }
+
+    if (H1 !== ""){
+        PROJ.H1 = H1;
+    }
 }
 
 
@@ -227,6 +247,11 @@ function addContentToProject(ProjectStr, h1Str, txtStr, IdStr, SAVESTR){
                 break
         } 
     }
+}
+
+function addContentToProjectByID(IDstr,  h1Str, txtStr, IdStr, SAVESTR){
+    PROJ = findProjectByID(IDstr);
+    addContentToProject(PROJ.title, h1Str, txtStr,IdStr,SAVESTR);
 }
 
 ////// 5) removeContentFromProject ////////////////
