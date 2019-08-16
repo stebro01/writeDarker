@@ -422,23 +422,9 @@ function updateNavList(){
 
 			var colW = 12-(colOpt+colNav+colProj+colEditor_2);
 			$("#swMainContent_1").removeClass($("#swMainContent_1").attr('class'));
-            $("#swMainContent_1").addClass("colSW scrollableCol col-sm-"+colW);
+            $("#swMainContent_1").addClass("colSW col-sm-"+colW);
             $("#swMainContent_2").removeClass($("#swMainContent_2").attr('class'));
-			$("#swMainContent_2").addClass("colSW scrollableCol col-sm-"+colEditor_2);
+			$("#swMainContent_2").addClass("colSW col-sm-"+colEditor_2);
         }
         
-        function updateCSS(){
-            $("body").css({"background-color":OPTIONS.Layout.CSS.bodyBG});
-            $("body").css({"color":OPTIONS.Layout.CSS.bodyColor});
- 
-            $(".btnNav").css({"background-color":OPTIONS.Layout.CSS.btnNavBG});
-            $(".btnNav").css({"border-color":OPTIONS.Layout.CSS.btnNavBorderColor});
-
-            $("#swStatusFeld").css({"background-color":OPTIONS.Layout.CSS.swStatusFeldBG});
-
-            $(".swMain_H1").css({"color":OPTIONS.Layout.CSS.swMain_H1_color});
-            $(".swMain_H2").css({"color":OPTIONS.Layout.CSS.swMain_H1_color});
-
-            $("body").css({"font-family":OPTIONS.Layout.CSS.mainFont});
-
-        }
+    

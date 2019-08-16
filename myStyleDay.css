@@ -12,6 +12,10 @@
     background-color:#EEE5DB;
 }
 
+.bg_color_highlight{
+    background-color: rgba(211,154,162,0.1);
+}
+
 body{
 
 }

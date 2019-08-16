@@ -1,5 +1,9 @@
 /* MAIN SETTINGS
 ------------------------*/
+.DEBUGMODE{
+    display: block;
+}
+
 body{
     font-size: 1em;
     font-family: "Avenir";
@@ -55,13 +59,23 @@ img.thumbnail{
 /* MAIN CONTENT FIELD 
 ------------------------*/
 .colSW{
-    
+    width: 100%;
+    margin-left:0px;
+    margin-right:0px;
 }
 
 /* CONTENT FIELD 1 */
 .content_TOP_H1{
-    color:whitesmoke;
     font-size:0.8em;
+    margin-top:10px;
+    margin-bottom:10px;
+    border-bottom:1px solid #353738;
+    user-select: none;
+}
+
+/* CONTENT FIELD 2 */
+.content_TOP_H2{
+    font-size:0.6em;
     margin-top:10px;
     margin-bottom:10px;
     border-bottom:1px solid #353738;

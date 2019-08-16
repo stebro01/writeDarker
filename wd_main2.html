@@ -105,6 +105,21 @@
 					</div>
 				</div>
 
+				<div class="content_TOP_H2 font_color_2" style="margin-top:40px">
+					Projekte
+				</div>
+
+				<div class="content_TOP_H2 font_color_2" style="margin-top:40px">
+						Projekte
+					
+				</div>
+				<span id="swProjCustom"></span>
+
+				<!-- SOME DEBUGGIN OPTIONS -->
+				<div class="content_TOP_H2 font_color_2 DEBUGMODE" style="margin-top:40px">
+					Debugging options
+					<button id="btnDebugLoadProject" type="button" class="btn btn-dark btnNav" style="font-size:1em">UpdateProjectView</button>
+				</div>
 			</div>
 
 			<!-- NAVIGATOR VIEW -->
@@ -118,28 +133,33 @@
 				</div>
 			</div>
 
-			<!-- EDITOR VIEW 1 -->
-			<div id="swMainContent_1" class="col-sm-3 scrollableCol colSW">
-				<div class="content_TOP_H1 font_color_2">Editor 1
-					<div class="btn-group float-right">
-						<button id="btnNewText_1" class="btnNav font_color_2">NEU</button>
-					</div>
-				</div> 
-			</div>
-
-			<!-- EDITOR VIEW 2-->
-			<div id="swMainContent_2" class="col-sm-3 scrollableCol colSW">
-				<div class="content_TOP_H1 font_color_2">Editor 2
-					<div class="btn-group float-right">
-						<button id="btnNewText_2" class="btnNav font_color_2">NEU</button>
-						<button id="btnEditor2_close" class="btnNav font_color_2">X</button>
-					</div>
+			<!-- EDITOR VIEW 1 -->			
+			<div id="swMainContent_1" class="col-sm-3 colSW" value="on">
+				<div class="swEditor scrollableCol bg_color_highlight" >
+					<div class="content_TOP_H1 font_color_2">Editor 1
+						<div class="btn-group float-right">
+							<button id="btnNewText_1" class="btnNav font_color_2">NEU</button>
+						</div>
+					</div> 
+					inhalt
 				</div>
 			</div>
 
-			
+			<!-- EDITOR VIEW 2-->
+			<div id="swMainContent_2" class="col-sm-3 colSW" value="off">
+				<div class="swEditor scrollableCol" >
+					<div class="content_TOP_H1 font_color_2">Editor 2
+						<div class="btn-group float-right">
+							<button id="btnNewText_2" class="btnNav font_color_2">NEU</button>
+							<button id="btnEditor2_close" class="btnNav font_color_2">X</button>
+						</div>
+					</div>
+					inhalt
+				</div>
+			</div>
+		
 
-			<!-- NAVIGATOR VIEW -->
+			<!-- OPTIONS VIEW -->
 			<div id="swMainOptions" class="col-sm-2 colSW">
 				<div class="content_TOP_H1 font_color_2" style="text-align:center">
 					<button id="swColOptBig" class="btnNav font_color_2 float-left"><</button>
@@ -198,8 +218,6 @@
 			//updateNavList();
 			*/
 
-
-
 			/*little script to switch beetwenn day and night*/
 			$('#switch_day').click(function(){
 				if($('link#dayandnight').attr('href')=="myStyleDark.css"){
@@ -217,7 +235,24 @@
 					}
 				})
 			});
+
+			// highlight the last clicked Editor and update VALUE field
+			$(".swEditor").click(function(){
+				$(".swEditor").removeClass("bg_color_highlight").parent().attr({"value":"off"});
+				$(this).addClass("bg_color_highlight").parent().attr({"value":"on"});
+			})
 		
+			//some debuggin options
+			$("#btnDebugLoadProject").click(function(){
+				console.log('click:btnDebugLoadProject')
+				PN = returnProjectNames();
+				var contentStr="";
+				for (i=0;i<PN.length; i++){
+					contentStr += "<p>"+PN[i]+"</p>";
+				}
+				$("#swProjCustom").html(contentStr);
+				
+			});
 	
 	</script>
 

@@ -12,6 +12,10 @@
     background-color: #222427;
 }
 
+.bg_color_highlight{
+    background-color: rgba(52,58,64,0.1);
+}
+
 body{
 
 }
@@ -53,7 +57,6 @@ body{
     background-color: #333A40;
     color:white;
 }
-
 
 
 
