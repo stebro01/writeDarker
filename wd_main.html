@@ -11,7 +11,7 @@
 
   	<!-- MAIN CSS -->
 	  <link rel="stylesheet" href="myStyleMain.css">
-	  <link id="dayandnight" rel="stylesheet" href="myStyleDark.css">
+	  <link id="dayandnight" rel="stylesheet" href="myStyleDay.css">
   	<title>Scientific Writer</title>
   </head>
 
@@ -260,8 +260,9 @@
 	<script src="wd_mainEditor.js"></script>
 	 <!-- 
 	<script src="wd_menuFont.js"></script>-->
-	<script src="wd_windowManager.js"></script>
 	<script src="wd_projectManager.js"></script>
+	<script src="wd_windowManager.js"></script>
+	
 	
 		
 	<script>
@@ -273,6 +274,9 @@
 			loadLocal();
 			//updateNavList();
 			*/
+
+			loadGUI_Projects();    
+			loadGUI_Navigation();
 
 			/*little script to switch beetwenn day and night*/
 			$('#switch_day').click(function(){

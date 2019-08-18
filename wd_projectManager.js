@@ -8,9 +8,6 @@ if (loadProjectLocal() == false)
     PN = returnProjectNames();
     ACTIVE_PROJECT = findProjectByID(PN[0].id);
 
-loadGUI_Projects();    
-loadGUI_Navigation();
-
 /* ENDOF STARTUP */
 
 
@@ -103,42 +100,6 @@ function loadGUI_Projects(){
     $("")
     $("#swProjects").html(contentStr);
 }
-
-function findProjectByID(_creationID){
-    // usage: findProjectByID("1565958138067_11")
-    var KEY = Object.keys(DATA);
-        
-    for (i=0; i<KEY.length; i++){
-        if (typeof(DATA[KEY[i]])=="object"){
-            if (DATA[KEY[i]]._creationID == _creationID){
-                return DATA[KEY[i]];
-            }
-        }
-    }
-    return false;
-}
-
-function findEntryByID(projID, entryID){
-    PROJ = findProjectByID(projID);
-    for (i=0;i<PROJ.content.length; i++){
-        if (PROJ.content[i].strID == entryID){
-            return PROJ.content[i];
-        }
-    }
-    return false
-}
-
-function updateProjectEntryByID(projID, entryID, H1, TXT){
-    PROJ = findEntryByID(projID, entryID);
-    if (TXT !== ""){
-        PROJ.TXT = TXT;
-    }
-
-    if (H1 !== ""){
-        PROJ.H1 = H1;
-    }
-}
-
 
 ////// 1) INITPROJECTMANAGER ////////////////
 function initProjectManager(){
@@ -306,9 +267,25 @@ function moveContentfromProject1to2(ProjectStr1, ProjectStr2, el1ID, SAVESTR){
 ////// 8) moveContentToTrash ////////////////
 function moveContentToTrash(ProjectStr, elID, SAVESTR){
     //ie: moveContentToTrash(["Demo 2"], 1); DATA.trash.content
+    
     moveContentfromProject1to2(ProjectStr, "trash", elID, SAVESTR);
     return true
 }
+
+function moveContentToTrashByID(projID, elID){
+    PROJ = findProjectByID(projID);
+    pos = -1;
+    for (i=0;i<PROJ.content.length;i++){
+        if (PROJ.content[i].strID == elID){
+            pos = i;
+        }
+    }
+    if (pos == -1){
+        return false;
+    }
+    moveContentToTrash(PROJ.title, pos);
+    return true;    
+};
 
 ////// 9) restoreContentFromTrash ////////////////
 function restoreContentFromTrash(ProjectStr, elIDTrash, SAVESTR){
@@ -328,6 +305,7 @@ function deleteTrash(ProjectStr, elIDTrash, SAVESTR){
 function saveProjectLocal(){
     window.localStorage.setItem("wd_PROJECT", JSON.stringify(DATA));
     console.log("speichere lokale Daten: erfolgreich [DATA -> wd_PROJECT]"+Date());
+    logInfo("speichern erfolgreich ["+Date()+"]");
 }
 
 ////// 12) loadProjectLocal ////////////////
@@ -359,7 +337,6 @@ function returnProjectNames(){
     return ProjectNames;
 }
 
-
 ////////////////// NEEDFUL THINGS
 
 // + swap_array > just change two elements within an array
@@ -384,12 +361,13 @@ function addContentStrToProject(ProjectStr, h1Str, txtStr, IdStr){
     content = new Object();
     content.H1 = h1Str;
     content.TXT = txtStr;
-    console.log(IdStr)
     if (IdStr == "" | IdStr == "undefined" | typeof(IdStr) == "undefined"){
         IdStr = Date.now() + "_" + DATA[ProjectStr].content.length;
     }
     content.strID = IdStr;
-    content._creationID = Date.now();
+    content._creationID = IdStr;
+    content._lastChanged = Date.now();
+    content._lastChangedStr = Date();
     content._lastSync = false;
     content._needSync = true;
     DATA[ProjectStr].content.push(content);
@@ -413,4 +391,41 @@ function testTHESEfunctions(){
 
 }
 
-   
+function findProjectByID(_creationID){
+    // usage: findProjectByID("1565958138067_11")
+    var KEY = Object.keys(DATA);
+        
+    for (i=0; i<KEY.length; i++){
+        if (typeof(DATA[KEY[i]])=="object"){
+            if (DATA[KEY[i]]._creationID == _creationID){
+                return DATA[KEY[i]];
+            }
+        }
+    }
+    return false;
+}
+
+function findEntryByID(projID, entryID){
+    PROJ = findProjectByID(projID);
+    for (i=0;i<PROJ.content.length; i++){
+        if (PROJ.content[i].strID == entryID){
+            return PROJ.content[i];
+        }
+    }
+    return false
+}
+
+function updateProjectEntryByID(projID, entryID, H1, TXT){
+    PROJ = findProjectByID(projID);
+    ENTRY = findEntryByID(projID, entryID);
+    if (TXT !== ""){
+        ENTRY.TXT = TXT;
+    }
+
+    if (H1 !== ""){
+        ENTRY.H1 = H1;
+    }
+    project_changed(PROJ.title);
+    ENTRY._lastChanged = Date.now();
+    ENTRY._lastChangedStr = Date();
+}

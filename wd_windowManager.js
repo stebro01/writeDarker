@@ -99,6 +99,7 @@ $('[contenteditable=true]').on('input', (e) => {
     }
 
     updateProjectEntryByID(ID[0], ID[1], H1, TXT);
+    OPTIONS.ContentChanged = true;
 });
 
 //////////////////////////////////////////////////////////////////
@@ -109,31 +110,40 @@ $(".swText_H1").focusout(function(){
     updateNavList();
 })
 
+$(".swText_Feld").focusout(function(){
+    updateNavList();
+})
+
 // DRAG DROP
 $( "#swNavList" ).sortable({
     start: function(e, ui) {
         OPTIONS.tmpDragPosStart = ui.item.index();
+        console.log("start")
     },
     update: function(event,ui ) {
-      OPTIONS.tmpDragPosEnd = ui.item.index();
-      swContentReplace();
+    OPTIONS.tmpDragPosEnd = ui.item.index();
+    swap_array(ACTIVE_PROJECT.content, OPTIONS.tmpDragPosStart,OPTIONS.tmpDragPosEnd);
+    OPTIONS.ContentChanged = true;
+    updateNavList();
     }
 });
 $( "#swNavList" ).disableSelection();
 
-// CLICK ON NAV ELEMENT
-
-function swContentReplace(){
-    ChEl = $("#swContent").find(".swContentBlock");
-    pos1 = OPTIONS.tmpDragPosStart+1;
-    pos2 = OPTIONS.tmpDragPosEnd+1;
+$("#swProjTrash").droppable({
     
-    el1 = $(ChEl[pos1]).clone(true);
-    el2 = $(ChEl[pos2]).clone(true);
-    $(ChEl[pos1]).replaceWith(el2);
-    $(ChEl[pos2]).replaceWith(el1);
-    updateNavList();
-};
+        greedy: true,
+        classes: {
+          "ui-droppable-active": "ui-state-active",
+          //"ui-droppable-hover": "ui-state-hover"
+        },
+    drop: function( event, ui ) {
+        console.log(OPTIONS.tmpDragPosStart)
+      $( this )
+        .addClass( "ui-state-highlight" )
+        .find( "p" )
+          .html( "Dropped!" );
+    }
+  });
 
 // NAVLIST FUNCTIONS
 function swNavTOF_click(e){
@@ -141,9 +151,7 @@ function swNavTOF_click(e){
     child = e;
     var i = 0;
     while( (child = child.previousSibling) != null ) {i++;}
-    pos = i;
-    logDebug("swNavTOF_click:"+pos)
-
+    pos = i+1;
     activeContent = getActiveEditor().find(".swText_H1");
     var new_position = $(activeContent[pos]).position().top - $(activeContent[0]).position().top;
     activeEditor = getActiveEditor().find(".swEditor");
@@ -152,19 +160,13 @@ function swNavTOF_click(e){
 
 // UPDATE NAVLIST
 function updateNavList(){
-    $("#swNavList").html("");
-    var firstLoop = -1;
-    $("#swContent").find(".swText_H1").each(function(){
-        var $curEl = $(this);
-        firstLoop += 1;
-        if (firstLoop >0){
-            var str = '<li id="swNavTOF_'+firstLoop+'" class="ui-state-default swNavTofRow" onclick="swNavTOF_click(this)">'+$curEl.text()+'</li>';
-            $("#swNavList").html($("#swNavList").html() + str);
-        }
-    })
-    logDebug("updateNavList");
+    if (OPTIONS.ContentChanged){
+        loadGUI_Navigation();
+        logDebug("updateNavList");
+        OPTIONS.ContentChanged = false;
+        saveProjectLocal();
+    }
 }
-
 
 //////////////CLICK THE BUTTONS IN THE EDITOR////////////////////////////////////////////////////
 function btnHideContent(e){
@@ -181,29 +183,40 @@ function btnHideContent(e){
 }
 
 function btnRemoveContent(e){
- var $el = $(e);
-    $el.parent().parent().remove();
-    updateNavList();
+    var $el = $(e);
+    ID = return_ProjectID_byHandle(e);
+    if (moveContentToTrashByID(ID[0], ID[1]))
+        {
+            OPTIONS.ContentChanged = true;
+            updateNavList();
+        }
 }
    
+function return_ProjectID_byHandle(e){
+    var ID = [];
+    
+    if ($(e.target).hasClass("swText_H1") ){
+        $el = $(e.target).parent().parent();
+        ID = $el.attr("id").split("@");
+    } 
 
-$( "#swNavList" ).sortable({
-    start: function(e, ui) {
-        OPTIONS.tmpDragPosStart = ui.item.index();
-    },
-    update: function(event,ui ) {
-      OPTIONS.tmpDragPosEnd = ui.item.index();
-      swContentReplace();
-      
+    if ($(e).hasClass("btnRemoveContent") ){
+        $el = $(e).parent().parent();
+        ID = $el.attr("id").split("@");
+    } 
+
+    if ($(e.target).hasClass("swText_Feld")){
+        $el = $(e.target).parent();
+        ID = $el.attr("id").split("@");
     }
-});
 
-
-
-///// XX: EIN PAAR KLICK FUNKTIONEN
-$(".swProjectRow").on("dblclick", function(){
-    logDebug("dbl:swProjects"+$(this).attr("id"))
-})
+    if (ID == ""){
+        logDebug("ID not found!");
+        return false;
+    } else{
+        return ID;
+    }
+}
 
 
 ///// btnNAV >>> das sind fast alle Buttons
@@ -263,7 +276,6 @@ function btnNAVRUN(e){
             break;        
         case "btnEditor2_close":
             OPTIONS.Layout.swMainEditor_2 = false;
-            
             updateMainColWidth();   
             setActiveEditor(1); 
             break;                    
@@ -272,7 +284,6 @@ function btnNAVRUN(e){
             break
     }
 };
-
 
 
 //////////////////////////////////////////////////////////////////
@@ -379,7 +390,6 @@ function setActiveEditor(num){
 }
 
 function getActiveEditor(num){
-
     if (typeof(num) == "undefined"){
         if (OPTIONS.Layout.swMainEditor_ACTIVE  == 1){
             activeEditor = $("#swMainContent_1");
@@ -390,8 +400,6 @@ function getActiveEditor(num){
     } else {
         activeEditor = $("#swMainContent_"+num);
     }
-
-    
     return activeEditor
 }
 

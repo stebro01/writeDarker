@@ -103,6 +103,9 @@ img.thumbnail{
     z-index: 1000;
  }
  
+ .ui-state-active{
+     background-color:red;
+ }
 
 /* CONTENT FIELD 1 */
 .content_TOP_H1{

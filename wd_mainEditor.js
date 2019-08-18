@@ -40,6 +40,8 @@ var OPTIONS = new Object()
     OPTIONS.Sound.TippUrl = 'media/tipp_sound.wav';
     OPTIONS.CodeView = false;
 
+    OPTIONS.ContentChanged = false;
+
     OPTIONS.Store_LocalName = "wd_STORAGE";
     OPTIONS.tmpDragPosStart = [];
     OPTIONS.tmpDragPosEnd = [];
@@ -62,36 +64,6 @@ var OPTIONS = new Object()
         function logInfo(strText){
             $("#swBottomNavTxt").text(strText);
         }
-
-//DATA STORAGE LOCALLY
-$(".btnStore").click(function(){
-    var idStr = $(this).attr("id");
-    switch(idStr){
-        case "btnProjStore":
-                logDebug("storeLocally");
-
-                // check for previously stored data
-                var oldDataFound = false;
-                for (i=0; i<window.localStorage.length; i++){
-                    if (window.localStorage.key(i) == OPTIONS.Store_LocalName)
-                        oldDataFound = true;
-                }
-
-                if (oldDataFound){
-                    $('#swModalSave').modal('show');
-                } else{
-                    storeLocal();
-                }
-            break
-        case "btnProjLoad":
-                logDebug("loadLocally");
-                loadLocal();
-            break
-        default:
-            logDebug(idStr+": id not found");
-            break
-    }
-});
 
 function loadLocal(){
     wd_STORAGE = JSON.parse(window.localStorage.getItem(OPTIONS.Store_LocalName));
